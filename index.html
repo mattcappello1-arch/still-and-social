@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Still & Social, A Sanctuary for Slower Living</title>
+<meta name="description" content="A soulful sanctuary in a fast-paced world. A space to slow down, reconnect, and come back to yourself. Hospitality, ritual, and wellness, shaped by the rituals of good living." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Google+Sans+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  /* ========================================================
+     BRAND TOKENS, derived from Still & Social Brand Guide
+     ======================================================== */
+  :root {
+    --cream:        #F5F1DD;
+    --cream-soft:   #EFEAD2;
+    --oatmeal:      #C9BDA5;
+    --oatmeal-dk:   #A99B7F;
+    --rosewood:     #7E5B5F;
+    --sienna:       #9F5136;
+    --sienna-dk:    #7E3F26;
+    --coffee:       #59493A;
+    --charcoal:     #241F21;
+    --olive:        #867B3A;
+    --sage:         #5A6051;
+    --sage-deep:    #444A3D;
+
+    --bg:           var(--cream);
+    --ink:          #2B2620;
+    --ink-soft:     #5C544A;
+    --rule:         rgba(43, 38, 32, 0.12);
+
+    --serif: 'Cormorant Garamond', 'Moulin', 'Didot', Georgia, serif;
+    --mono:  'Google Sans Code', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+    --max:    1320px;
+    --gutter: clamp(20px, 4vw, 56px);
+  }
+
+  /* ========================================================
+     RESET
+     ======================================================== */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.7;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; }
+
+  /* Paper grain, global warmth */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.32;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16  0 0 0 0 0.13  0 0 0 0 0.10  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* ========================================================
+     TYPE PRIMITIVES
+     ======================================================== */
+  .serif { font-family: var(--serif); font-weight: 300; letter-spacing: -0.01em; }
+  .mono  { font-family: var(--mono); }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sienna);
+    font-weight: 500;
+  }
+  .eyebrow .dot {
+    display: inline-block;
+    width: 5px; height: 5px;
+    background: var(--sienna);
+    border-radius: 50%;
+    margin-right: 10px;
+    transform: translateY(-2px);
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--serif);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--ink);
+  }
+  /* Italic accent words inside headlines (e.g. the &, or an emphasised word) */
+  h1 em, h2 em, h3 em, h4 em, h5 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sienna);
+  }
+
+  .container {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ========================================================
+     NAV
+     ======================================================== */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 22px 0;
+    transition: background 0.4s ease, padding 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .nav.scrolled {
+    background: rgba(245, 241, 221, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 14px 0;
+    border-bottom-color: var(--rule);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    color: var(--ink);
+    transition: color 0.4s ease;
+  }
+  .brand-mark:hover { color: var(--sienna); }
+  .brand-icon {
+    width: 64px; height: 64px;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.2, 0.6, 0.2, 1), width 0.4s ease, height 0.4s ease;
+  }
+  .nav.scrolled .brand-icon {
+    width: 50px; height: 50px;
+  }
+  .brand-mark:hover .brand-icon { transform: translateY(-2px); }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .nav-links a { transition: color 0.3s ease; position: relative; padding: 4px 0; }
+  .nav-links a:hover { color: var(--sienna); }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -4px;
+    height: 1px;
+    background: var(--sienna);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding: 10px 18px;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    transition: all 0.4s ease;
+  }
+  .nav-cta:hover { background: var(--ink); color: var(--cream); }
+  .menu-toggle { display: none; background: none; border: 0; color: var(--ink); padding: 8px; }
+
+  @media (max-width: 980px) {
+    .nav-links, .nav-cta { display: none; }
+    .menu-toggle { display: block; }
+    .nav.open .nav-links {
+      display: flex;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      flex-direction: column;
+      gap: 22px;
+      padding: 36px var(--gutter) 40px;
+      background: var(--cream);
+      border-top: 1px solid var(--rule);
+      font-size: 13px;
+    }
+  }
+
+  /* ========================================================
+     HERO
+     ======================================================== */
+  .hero {
+    padding: 120px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ---- FULL-BLEED MEDIA BAND ----
+     Spans the entire viewport width. Drop in a photo via:
+       .hero-media { background-image: url('your-photo.jpg'); }
+     or swap the div for a <video class="hero-media"> (see HTML comment). */
+  .hero-media {
+    position: relative;
+    width: 100%;
+    height: clamp(56vh, 70vh, 80vh);
+    background: linear-gradient(165deg, var(--cream-soft) 0%, var(--oatmeal) 70%, var(--oatmeal-dk) 100%);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  video.hero-media,
+  .hero-media img {
+    object-fit: cover;
+    width: 100%;
+    height: clamp(56vh, 70vh, 80vh);
+    display: block;
+  }
+  .media-slot-hint {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0.4;
+  }
+  .hero-media-caption {
+    position: absolute;
+    bottom: 32px; left: 40px; right: 40px;
+    color: var(--cream);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0.85;
+    z-index: 3;
+    mix-blend-mode: difference;
+  }
+
+  /* ---- INTRO TEXT (below the media) ---- */
+  .hero-intro {
+    text-align: center;
+    padding: clamp(72px, 9vw, 140px) 0 clamp(80px, 11vw, 160px);
+    max-width: 900px;
+  }
+  .hero h1 {
+    font-size: clamp(52px, 8.5vw, 132px);
+    line-height: 1;
+    letter-spacing: 0.08em;
+    margin-bottom: 40px;
+  }
+  .hero h1 .amp {
+    font-style: italic;
+    color: var(--sienna);
+    font-weight: 300;
+    padding: 0 0.08em;
+    letter-spacing: 0;
+  }
+  .hero-tagline {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.2vw, 30px);
+    line-height: 1.3;
+    color: var(--sienna);
+    margin: 0 0 40px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .hero-body {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0 auto 56px;
+  }
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 28px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    transition: all 0.45s cubic-bezier(0.2, 0.6, 0.2, 1);
+    border: 1px solid transparent;
+  }
+  .btn .arrow { display: inline-block; transition: transform 0.4s ease; }
+  .btn:hover .arrow { transform: translateX(4px); }
+  .btn-primary { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .btn-primary:hover { background: var(--sienna); border-color: var(--sienna); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--cream); }
+
+  @media (max-width: 880px) {
+    .hero { padding: 90px 0 0; }
+    .hero-media, video.hero-media, .hero-media img { height: clamp(50vh, 60vh, 68vh); }
+    .hero-intro { padding: 64px 0 72px; }
+  }
+
+  /* ========================================================
+     SECTION CHROME
+     ======================================================== */
+  section { position: relative; z-index: 2; }
+  .section { padding: clamp(100px, 14vw, 200px) 0; position: relative; }
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: clamp(48px, 6vw, 88px);
+  }
+  .section-head h2 {
+    font-size: clamp(40px, 5.5vw, 88px);
+    line-height: 1;
+    letter-spacing: 0.05em;
+  }
+  .section-head h2 em { font-style: italic; color: var(--sienna); }
+  .section-head .lede {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    max-width: 44ch;
+    margin: 0;
+  }
+  @media (max-width: 760px) {
+    .section-head { grid-template-columns: 1fr; gap: 28px; align-items: start; }
+  }
+
+  /* ========================================================
+     MANIFESTO (was: story)
+     ======================================================== */
+  .manifesto-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 28px;
+    margin-bottom: clamp(64px, 8vw, 120px);
+  }
+  .manifesto-head h2 {
+    font-size: clamp(40px, 5.5vw, 88px);
+    line-height: 1.05;
+    letter-spacing: 0.05em;
+  }
+  .manifesto-head h2 em {
+    font-style: italic;
+    color: var(--sienna);
+  }
+  .manifesto-head-meta { padding-top: 0; }
+
+  .manifesto-body {
+    max-width: 680px;
+    margin: 0 auto;
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: clamp(13px, 1.2vw, 15px);
+    line-height: 2.3;
+    color: var(--ink);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .manifesto-body p { margin: 0 0 2.6em; }
+  .manifesto-body p:last-of-type { margin-bottom: 0; }
+  .manifesto-body em {
+    color: var(--sienna);
+    font-style: normal;
+  }
+  .manifesto-divider {
+    text-align: center;
+    margin: 2.6em 0;
+    color: var(--oatmeal);
+    letter-spacing: 1em;
+    font-size: 10px;
+  }
+  .manifesto-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 2.6em;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sienna);
+    border-bottom: 1px solid var(--sienna);
+    padding-bottom: 4px;
+    transition: gap 0.4s ease, color 0.4s ease;
+  }
+  .manifesto-link .arrow { display: inline-block; transition: transform 0.4s ease; }
+  .manifesto-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  .manifesto-link:hover .arrow { transform: translateX(4px); }
+  @media (max-width: 760px) {
+    .manifesto-head { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  /* ========================================================
+     ESSENCE PULLQUOTE
+     ======================================================== */
+  .essence {
+    background: var(--rosewood);
+    color: var(--cream);
+    padding: clamp(120px, 16vw, 220px) 0;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .essence::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.45;
+  }
+  .essence-quote {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(30px, 4.4vw, 60px);
+    line-height: 1.3;
+    color: var(--cream);
+    max-width: 18ch;
+    margin: 0 auto;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .essence-quote em { color: var(--oatmeal); font-style: italic; font-weight: 300; }
+  .essence-attribution {
+    margin-top: 64px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--oatmeal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+  .essence-attribution::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--oatmeal);
+  }
+
+  /* ========================================================
+     THE WORLD, three pillars overview
+     ======================================================== */
+  .world-overview {
+    background: var(--cream-soft);
+  }
+  .pillars-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin-top: 60px;
+  }
+  .pillar-item {
+    padding: 44px 24px 36px;
+    border-right: 1px solid var(--rule);
+    text-align: center;
+    transition: background 0.5s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pillar-item:last-child { border-right: 0; }
+  .pillar-item:hover { background: rgba(159, 81, 54, 0.05); }
+  .pillar-item .glyph {
+    width: 72px; height: 72px;
+    margin: 0 auto 40px;
+    color: var(--ink);
+    transition: transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1), color 0.4s ease;
+    display: block;
+  }
+  .pillar-item:hover .glyph {
+    color: var(--sienna);
+    transform: translateY(-4px);
+  }
+  .pillar-item .num {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--sienna);
+    margin-bottom: 14px;
+  }
+  .pillar-item h4 {
+    font-family: var(--serif);
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .pillar-item .sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+    line-height: 1.5;
+  }
+  .pillar-item .status-mini {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    display: inline-block;
+    color: var(--ink-soft);
+  }
+  .pillar-item .status-mini.open {
+    color: #5a7a1f;
+    border-color: rgba(90, 122, 31, 0.4);
+    background: rgba(90, 122, 31, 0.07);
+  }
+  @media (max-width: 760px) {
+    .pillars-strip { grid-template-columns: 1fr; }
+    .pillar-item { border-right: 0; border-bottom: 1px solid var(--rule); }
+    .pillar-item:last-child { border-bottom: 0; }
+  }
+
+  /* ========================================================
+     PILLAR CHAPTER, the vision sections
+     ======================================================== */
+  .chapter {
+    padding: clamp(120px, 17vw, 220px) 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .chapter-inner {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    gap: clamp(48px, 7vw, 120px);
+    align-items: center;
+  }
+  .chapter-inner.reverse { grid-template-columns: 4fr 5fr; }
+  .chapter-inner.reverse .chapter-copy { order: 2; }
+  .chapter-inner.reverse .chapter-visual { order: 1; }
+
+  .chapter-marker {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .chapter-marker .num {
+    color: var(--sienna);
+    font-weight: 500;
+  }
+  .chapter-marker .line {
+    width: 60px; height: 1px; background: var(--ink-soft);
+    opacity: 0.5;
+  }
+
+  .chapter h2 {
+    font-size: clamp(44px, 6vw, 96px);
+    line-height: 1;
+    margin-bottom: 28px;
+    letter-spacing: 0.06em;
+  }
+  .chapter h2 .ampers,
+  .chapter h2 em { font-style: italic; color: var(--sienna); }
+  .chapter h2 small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 24px;
+    font-weight: 400;
+  }
+
+  .chapter-tagline {
+    font-family: var(--mono);
+    font-size: clamp(11px, 1.1vw, 14px);
+    line-height: 1.7;
+    color: var(--sienna);
+    margin: 0 0 40px;
+    font-weight: 500;
+    max-width: 36ch;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .chapter-body {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 2.05;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin-bottom: 40px;
+    letter-spacing: 0.01em;
+  }
+  .chapter-body p { margin: 0 0 1.5em; }
+  .chapter-body p:last-child { margin-bottom: 0; }
+
+  .chapter-stanza {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.95;
+    color: var(--ink-soft);
+    margin-bottom: 40px;
+    max-width: 48ch;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .chapter-stanza span { display: block; }
+  .chapter-stanza .key {
+    color: var(--ink);
+    margin-top: 1em;
+    font-weight: 500;
+  }
+
+  .chapter-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: rgba(245, 241, 221, 0.4);
+  }
+  .chapter-status .ind {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--ink-soft);
+  }
+  .chapter-status.open {
+    color: #5a7a1f;
+    border-color: rgba(90, 122, 31, 0.35);
+  }
+  .chapter-status.open .ind {
+    background: #6b8e23;
+    box-shadow: 0 0 0 4px rgba(107, 142, 35, 0.16);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(107, 142, 35, 0.16); }
+    50%      { box-shadow: 0 0 0 8px rgba(107, 142, 35, 0); }
+  }
+
+  .chapter-cta {
+    margin-top: 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--ink);
+    transition: gap 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+  }
+  .chapter-cta:hover { gap: 18px; color: var(--sienna); border-color: var(--sienna); }
+
+  /* Visual canvas per chapter */
+  .chapter-visual {
+    aspect-ratio: 4 / 5;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .chapter-visual .canvas {
+    position: absolute;
+    inset: 0;
+  }
+  .chapter-visual .label {
+    position: absolute;
+    bottom: 24px; left: 24px; right: 24px;
+    color: var(--cream);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0.85;
+    z-index: 3;
+  }
+  .chapter-visual .canvas::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/></svg>");
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .chapter-mark {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .chapter-mark svg {
+    width: clamp(160px, 26vw, 240px);
+    height: clamp(160px, 26vw, 240px);
+    color: var(--cream);
+    opacity: 0.95;
+    filter: drop-shadow(0 6px 40px rgba(0, 0, 0, 0.35));
+  }
+
+  /* Distinct canvas per pillar, atmospheric placeholders */
+  .canvas-dining {
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(255, 210, 160, 0.55), transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(255, 220, 170, 0.4) 0%, transparent 22%),
+      linear-gradient(160deg, #7a4a3b 0%, #4d2f25 60%, #2a1c17 100%);
+  }
+  .canvas-retreat {
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(245, 241, 221, 0.55), transparent 55%),
+      linear-gradient(170deg, #d4c5a8 0%, #b5a585 50%, #8a7b5e 100%);
+  }
+  .canvas-oasis {
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(200, 220, 230, 0.35), transparent 55%),
+      radial-gradient(ellipse at 50% 50%, rgba(126, 91, 95, 0.25), transparent 70%),
+      linear-gradient(160deg, #6b7878 0%, #4a5455 60%, #2f3535 100%);
+  }
+  .canvas-club {
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(225, 230, 205, 0.5), transparent 55%),
+      linear-gradient(180deg, #8a9072 0%, #6a7059 55%, #444a3d 100%);
+  }
+  .canvas-haven {
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(255, 220, 180, 0.55), transparent 55%),
+      linear-gradient(180deg, #d4a987 0%, #b88466 45%, #7a4a3b 100%);
+  }
+
+  /* Alternating background tones for chapter flow */
+  .chapter.tone-cream     { background: var(--cream); }
+  .chapter.tone-soft      { background: var(--cream-soft); }
+  .chapter.tone-charcoal  { background: var(--charcoal); color: var(--cream); }
+  .chapter.tone-coffee    { background: var(--coffee); color: var(--cream); }
+  .chapter.tone-rosewood  { background: var(--rosewood); color: var(--cream); }
+  .chapter.tone-sage      { background: var(--sage); color: var(--cream); }
+
+  .chapter.tone-charcoal h2,
+  .chapter.tone-coffee   h2,
+  .chapter.tone-rosewood h2,
+  .chapter.tone-sage     h2 { color: var(--cream); }
+  .chapter.tone-charcoal h2 em,
+  .chapter.tone-coffee   h2 em,
+  .chapter.tone-rosewood h2 em,
+  .chapter.tone-sage     h2 em { color: var(--oatmeal); }
+  .chapter.tone-charcoal .chapter-body,
+  .chapter.tone-coffee   .chapter-body,
+  .chapter.tone-rosewood .chapter-body,
+  .chapter.tone-sage     .chapter-body { color: rgba(245, 241, 221, 0.85); }
+  .chapter.tone-charcoal .chapter-stanza,
+  .chapter.tone-coffee   .chapter-stanza,
+  .chapter.tone-rosewood .chapter-stanza,
+  .chapter.tone-sage     .chapter-stanza { color: rgba(245, 241, 221, 0.7); }
+  .chapter.tone-charcoal .chapter-stanza .key,
+  .chapter.tone-coffee   .chapter-stanza .key,
+  .chapter.tone-rosewood .chapter-stanza .key,
+  .chapter.tone-sage     .chapter-stanza .key { color: var(--cream); }
+  .chapter.tone-charcoal .chapter-marker,
+  .chapter.tone-coffee   .chapter-marker,
+  .chapter.tone-rosewood .chapter-marker,
+  .chapter.tone-sage     .chapter-marker { color: var(--oatmeal); }
+  .chapter.tone-charcoal .chapter-marker .num,
+  .chapter.tone-coffee   .chapter-marker .num,
+  .chapter.tone-rosewood .chapter-marker .num,
+  .chapter.tone-sage     .chapter-marker .num { color: var(--cream); }
+  .chapter.tone-charcoal .chapter-marker .line,
+  .chapter.tone-coffee   .chapter-marker .line,
+  .chapter.tone-rosewood .chapter-marker .line,
+  .chapter.tone-sage     .chapter-marker .line { background: var(--oatmeal); }
+  .chapter.tone-charcoal h2 small,
+  .chapter.tone-coffee   h2 small,
+  .chapter.tone-rosewood h2 small,
+  .chapter.tone-sage     h2 small { color: var(--oatmeal); }
+  .chapter.tone-charcoal .chapter-tagline,
+  .chapter.tone-coffee   .chapter-tagline,
+  .chapter.tone-rosewood .chapter-tagline,
+  .chapter.tone-sage     .chapter-tagline { color: var(--oatmeal); }
+  .chapter.tone-charcoal .chapter-cta,
+  .chapter.tone-coffee   .chapter-cta,
+  .chapter.tone-rosewood .chapter-cta,
+  .chapter.tone-sage     .chapter-cta {
+    color: var(--cream);
+    border-bottom-color: var(--cream);
+  }
+  .chapter.tone-charcoal .chapter-cta:hover,
+  .chapter.tone-coffee   .chapter-cta:hover,
+  .chapter.tone-rosewood .chapter-cta:hover,
+  .chapter.tone-sage     .chapter-cta:hover {
+    color: var(--oatmeal);
+    border-bottom-color: var(--oatmeal);
+  }
+  .chapter.tone-charcoal .chapter-status,
+  .chapter.tone-coffee   .chapter-status,
+  .chapter.tone-rosewood .chapter-status,
+  .chapter.tone-sage     .chapter-status {
+    color: var(--oatmeal);
+    border-color: rgba(201, 189, 165, 0.35);
+    background: rgba(0,0,0,0.15);
+  }
+  .chapter.tone-charcoal .chapter-status .ind,
+  .chapter.tone-coffee   .chapter-status .ind,
+  .chapter.tone-rosewood .chapter-status .ind,
+  .chapter.tone-sage     .chapter-status .ind { background: var(--oatmeal); }
+
+  @media (max-width: 880px) {
+    .chapter-inner,
+    .chapter-inner.reverse { grid-template-columns: 1fr; gap: 48px; }
+    .chapter-inner.reverse .chapter-copy { order: 2; }
+    .chapter-inner.reverse .chapter-visual { order: 1; }
+    .chapter-visual { aspect-ratio: 4 / 4; }
+  }
+
+  /* ========================================================
+     VALUES
+     ======================================================== */
+  .values {
+    background: var(--coffee);
+    color: var(--cream);
+    padding: clamp(100px, 14vw, 200px) 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .values::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.65'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .values .eyebrow { color: var(--oatmeal); }
+  .values .eyebrow .dot { background: var(--oatmeal); }
+  .values h2 {
+    font-size: clamp(44px, 6vw, 96px);
+    line-height: 1;
+    color: var(--cream);
+    margin: 0 auto 24px;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+  .values h2 em { font-style: italic; color: var(--oatmeal); }
+  .values-lede {
+    font-family: var(--mono);
+    font-size: clamp(12px, 1.1vw, 14px);
+    line-height: 1.9;
+    color: var(--oatmeal);
+    max-width: 52ch;
+    margin: 0 auto 88px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .values-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .value-row {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: clamp(24px, 5vw, 72px);
+    padding: 44px 0;
+    border-top: 1px solid rgba(245, 241, 221, 0.15);
+    align-items: baseline;
+  }
+  .value-row:last-child { border-bottom: 1px solid rgba(245, 241, 221, 0.15); }
+  .value-row .label {
+    font-family: var(--serif);
+    font-size: clamp(26px, 3vw, 40px);
+    line-height: 1;
+    color: var(--cream);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .value-row .desc {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.85;
+    color: rgba(245, 241, 221, 0.78);
+    max-width: 46ch;
+  }
+  @media (max-width: 760px) {
+    .value-row { grid-template-columns: 1fr; gap: 14px; padding: 32px 0; }
+  }
+
+  /* ========================================================
+     JOURNAL
+     ======================================================== */
+  .journal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(24px, 3vw, 44px);
+  }
+  .article {
+    cursor: pointer;
+    transition: transform 0.5s ease;
+  }
+  .article:hover { transform: translateY(-4px); }
+  .article-img {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .article-img .ph {
+    position: absolute;
+    inset: 0;
+    transition: transform 1.2s cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+  .article:hover .article-img .ph { transform: scale(1.05); }
+  .ph-pause {
+    background:
+      radial-gradient(circle at 50% 45%, rgba(245, 230, 200, 0.45), transparent 50%),
+      linear-gradient(180deg, #7e5b5f 0%, #4a3437 100%);
+  }
+  .ph-gather {
+    background:
+      radial-gradient(ellipse at 50% 60%, rgba(255, 200, 150, 0.4), transparent 55%),
+      linear-gradient(160deg, #9f5136 0%, #5e2f1f 100%);
+  }
+  .ph-home {
+    background: linear-gradient(180deg, #c9bda5 0%, #867b3a 100%);
+  }
+  .article-img .ph::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/></svg>");
+    mix-blend-mode: overlay;
+  }
+  .article-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .article-meta .sep { width: 16px; height: 1px; background: var(--ink-soft); }
+  .article h3 {
+    font-size: clamp(22px, 2vw, 30px);
+    line-height: 1.15;
+    margin-bottom: 12px;
+    transition: color 0.4s ease;
+  }
+  .article:hover h3 { color: var(--sienna); }
+  .article p {
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  @media (max-width: 880px) {
+    .journal-grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  /* ========================================================
+     NORTH STAR
+     ======================================================== */
+  .northstar {
+    padding: clamp(80px, 12vw, 160px) 0;
+    background: var(--charcoal);
+    color: var(--cream);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .northstar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.4;
+  }
+  .northstar .eyebrow { color: var(--oatmeal); }
+  .northstar .eyebrow .dot { background: var(--oatmeal); }
+  .northstar-mark {
+    width: clamp(96px, 10vw, 140px);
+    height: clamp(96px, 10vw, 140px);
+    color: var(--cream);
+    margin: 0 auto 48px;
+    display: block;
+    opacity: 0.95;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.25));
+  }
+  .northstar h2 {
+    font-family: var(--serif);
+    font-size: clamp(44px, 6.5vw, 108px);
+    line-height: 1.05;
+    color: var(--cream);
+    margin: 32px auto 0;
+    font-weight: 300;
+    max-width: 14ch;
+    letter-spacing: 0.06em;
+  }
+  .northstar h2 em { font-style: italic; color: var(--oatmeal); }
+  .northstar-attr {
+    margin-top: 56px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--oatmeal);
+    opacity: 0.7;
+  }
+
+  /* ========================================================
+     SIGNUP
+     ======================================================== */
+  .signup {
+    padding: clamp(100px, 14vw, 200px) 0;
+    background: var(--cream-soft);
+    text-align: center;
+  }
+  .signup-inner { max-width: 640px; margin: 0 auto; }
+  .signup h2 {
+    font-size: clamp(40px, 5.5vw, 80px);
+    line-height: 1.1;
+    margin: 28px 0 28px;
+    letter-spacing: 0.05em;
+  }
+  .signup h2 em { font-style: italic; color: var(--sienna); }
+  .signup-body {
+    font-family: var(--mono);
+    font-size: clamp(13px, 1.2vw, 15px);
+    line-height: 1.8;
+    color: var(--ink-soft);
+    margin-bottom: 48px;
+    font-weight: 400;
+    max-width: 50ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .signup-form {
+    display: flex;
+    gap: 8px;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 6px;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    background: var(--cream);
+    transition: border-color 0.4s ease;
+  }
+  .signup-form:focus-within { border-color: var(--sienna); }
+  .signup-form input {
+    flex: 1;
+    border: 0;
+    background: transparent;
+    padding: 14px 20px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink);
+    outline: none;
+  }
+  .signup-form input::placeholder { color: var(--ink-soft); opacity: 0.7; }
+  .signup-form button {
+    background: var(--ink);
+    color: var(--cream);
+    border: 0;
+    border-radius: 999px;
+    padding: 14px 26px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    transition: background 0.4s ease;
+    white-space: nowrap;
+  }
+  .signup-form button:hover { background: var(--sienna); }
+  .signup-fineprint {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 28px;
+  }
+  @media (max-width: 560px) {
+    .signup-form { flex-direction: column; border-radius: 16px; }
+    .signup-form input { text-align: center; }
+  }
+
+  /* ========================================================
+     FOOTER
+     ======================================================== */
+  footer {
+    background: var(--charcoal);
+    color: var(--oatmeal);
+    padding: 100px 0 36px;
+    position: relative;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 80px;
+    border-bottom: 1px solid rgba(201, 189, 165, 0.15);
+  }
+  .footer-brand-icon {
+    width: 96px;
+    height: 96px;
+    color: var(--cream);
+    margin-bottom: 36px;
+    display: block;
+  }
+  .footer-brand h3 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 3.4vw, 48px);
+    line-height: 1;
+    color: var(--cream);
+    margin-bottom: 24px;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+  }
+  .footer-brand h3 em { font-style: italic; color: var(--sienna); }
+  .footer-brand p {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.75;
+    color: var(--oatmeal);
+    max-width: 40ch;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  .footer-col h5 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--sienna);
+    margin: 0 0 24px;
+    font-weight: 500;
+  }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; }
+  .footer-col li { margin-bottom: 14px; }
+  .footer-col a {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--oatmeal);
+    transition: color 0.4s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-col .tag {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--coffee);
+    background: var(--oatmeal);
+    padding: 2px 7px;
+    border-radius: 999px;
+  }
+  .footer-bottom {
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--coffee);
+  }
+  .footer-bottom a:hover { color: var(--cream); }
+
+  @media (max-width: 880px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 48px; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 520px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ========================================================
+     REVEAL ON SCROLL
+     ======================================================== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 1.1s cubic-bezier(0.2, 0.6, 0.2, 1), transform 1.1s cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal.d-1 { transition-delay: 0.1s; }
+  .reveal.d-2 { transition-delay: 0.2s; }
+  .reveal.d-3 { transition-delay: 0.3s; }
+  .reveal.d-4 { transition-delay: 0.4s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="brand-mark" aria-label="Still &amp; Social, Home">
+      <svg class="brand-icon" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><g transform="translate(9.30, -21.88) scale(0.1042)"><g transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"><path d="M4190 3590 c-260 -4 -437 -11 -457 -17 -17 -6 -132 -14 -255 -18 -139 -4 -268 -14 -343 -25 -66 -11 -174 -24 -240 -30 -228 -20 -310 -30 -413 -50 -56 -11 -134 -20 -172 -20 -38 0 -102 -7 -142 -15 -40 -9 -104 -20 -143 -26 -190 -27 -193 -146 -11 -492 20 -38 36 -76 36 -86 0 -9 7 -26 15 -38 9 -12 22 -40 29 -61 27 -75 106 -232 140 -276 19 -25 42 -68 51 -95 9 -28 20 -53 25 -56 5 -3 34 -41 64 -85 75 -106 280 -316 351 -360 32 -19 92 -58 134 -86 157 -104 266 -160 376 -190 50 -14 115 -34 145 -44 249 -84 953 -78 1167 9 26 10 72 27 102 36 68 21 215 100 261 141 19 17 55 44 80 61 124 85 312 306 395 464 11 21 32 51 46 66 63 69 162 267 190 378 6 28 23 68 35 91 13 22 24 50 24 61 0 11 12 38 27 59 24 36 73 153 110 264 28 86 68 185 95 237 48 94 50 180 3 201 -28 13 -912 14 -1725 2z"/><path d="M3850 1333 c-229 -39 -348 -91 -442 -196 -37 -41 -77 -92 -89 -114 -13 -21 -28 -45 -35 -53 -18 -22 -104 -284 -104 -318 0 -17 8 -39 18 -51 l17 -21 850 -1 850 0 22 26 c34 39 30 58 -44 202 -201 389 -447 546 -848 542 -60 -1 -148 -8 -195 -16z"/></g></g></svg>
+    </a>
+    <div class="nav-links">
+      <a href="#manifesto">Our Story</a>
+      <a href="#world">The World</a>
+      <a href="#dining">Dining</a>
+      <a href="#rituals">Rituals</a>
+      <a href="#wellness">Wellness</a>
+      <a href="#values">Values</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<header class="hero">
+  <!-- FULL-BLEED MEDIA SLOT: spans the entire page width.
+       To use an image:  set  .hero-media { background-image: url('your-photo.jpg'); }
+       To use a video:   replace the .media-slot div below with:
+       <video class="hero-media" autoplay muted loop playsinline poster="poster.jpg">
+         <source src="your-video.mp4" type="video/mp4">
+       </video>
+       Recommended ratio: wide / cinematic (16:9 or wider). -->
+  <div class="hero-media reveal" role="img" aria-label="Still & Social film">
+    <span class="media-slot-hint">Image / Video</span>
+    <div class="hero-media-caption">
+      <span>The Sanctuary</span>
+      <span>Est. 2025</span>
+    </div>
+  </div>
+
+  <div class="container hero-intro">
+    <h1 class="reveal d-1">
+      Still <span class="amp">&amp;</span> Social
+    </h1>
+    <p class="hero-tagline reveal d-2">Rituals of Good Living.</p>
+    <p class="hero-body reveal d-2">A soulful world of hospitality, wellness, and ritual. A slower pace. A deeper way of living. A space to come back to yourself.</p>
+    <div class="cta-row reveal d-3">
+      <a href="#world" class="btn btn-primary">
+        Enter the World <span class="arrow">→</span>
+      </a>
+      <a href="#manifesto" class="btn btn-ghost">
+        Read Our Story <span class="arrow">↓</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ============== MANIFESTO ============== -->
+<section class="section" id="manifesto">
+  <div class="container">
+    <div class="manifesto-head">
+      <div class="manifesto-head-meta reveal">
+        <div class="eyebrow"><span class="dot"></span>Our Story</div>
+      </div>
+      <h2 class="reveal d-1">There it is…<br>that <em>pause.</em></h2>
+    </div>
+
+    <div class="manifesto-body">
+      <p class="reveal">That half-second between silence and sensation. The moment the world exhales, and something deeper enters. A kind of presence. A kind of knowing that you're right where you're meant to be.</p>
+
+      <div class="manifesto-divider reveal">· · ·</div>
+
+      <p class="reveal"><em>Still &amp; Social is for those who seek the beauty in the pause. The grace in the gathering. The quiet strength of a moment made with care.</em></p>
+
+      <p class="reveal">So come sit. Come slow down. Come as you are. And leave a little more whole than when you arrived.</p>
+
+      <a href="#" class="manifesto-link reveal d-1">Read the full story <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ESSENCE PULLQUOTE ============== -->
+<section class="essence">
+  <div class="container">
+    <p class="essence-quote reveal">A soulful sanctuary in a <em>fast-paced</em> world.</p>
+    <div class="essence-attribution reveal d-1">Purposeful Slowness · Human-First Hospitality</div>
+  </div>
+</section>
+
+<!-- ============== THE WORLD ============== -->
+<section class="section world-overview" id="world">
+  <div class="container">
+    <div class="section-head">
+      <div class="reveal">
+        <div class="eyebrow"><span class="dot"></span>The World</div>
+        <h2>Three expressions. <em>One</em> sanctuary.</h2>
+      </div>
+      <p class="lede reveal d-1">Still &amp; Social is more than a place to dine. It is a soulful world, built around one quiet belief. That when we slow down, soften the noise, and return to ourselves, we feel more whole. One expression is open. Two more are taking shape.</p>
+    </div>
+
+    <div class="pillars-strip reveal d-2">
+      <a href="#dining" class="pillar-item">
+        <svg class="glyph" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><g transform="translate(9.30, -21.88) scale(0.1042)"><g transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"><path d="M4190 3590 c-260 -4 -437 -11 -457 -17 -17 -6 -132 -14 -255 -18 -139 -4 -268 -14 -343 -25 -66 -11 -174 -24 -240 -30 -228 -20 -310 -30 -413 -50 -56 -11 -134 -20 -172 -20 -38 0 -102 -7 -142 -15 -40 -9 -104 -20 -143 -26 -190 -27 -193 -146 -11 -492 20 -38 36 -76 36 -86 0 -9 7 -26 15 -38 9 -12 22 -40 29 -61 27 -75 106 -232 140 -276 19 -25 42 -68 51 -95 9 -28 20 -53 25 -56 5 -3 34 -41 64 -85 75 -106 280 -316 351 -360 32 -19 92 -58 134 -86 157 -104 266 -160 376 -190 50 -14 115 -34 145 -44 249 -84 953 -78 1167 9 26 10 72 27 102 36 68 21 215 100 261 141 19 17 55 44 80 61 124 85 312 306 395 464 11 21 32 51 46 66 63 69 162 267 190 378 6 28 23 68 35 91 13 22 24 50 24 61 0 11 12 38 27 59 24 36 73 153 110 264 28 86 68 185 95 237 48 94 50 180 3 201 -28 13 -912 14 -1725 2z"/><path d="M3850 1333 c-229 -39 -348 -91 -442 -196 -37 -41 -77 -92 -89 -114 -13 -21 -28 -45 -35 -53 -18 -22 -104 -284 -104 -318 0 -17 8 -39 18 -51 l17 -21 850 -1 850 0 22 26 c34 39 30 58 -44 202 -201 389 -447 546 -848 542 -60 -1 -148 -8 -195 -16z"/></g></g></svg>
+        <div class="num">01</div>
+        <h4>Dining Sanctuary</h4>
+        <div class="sub">Slow dining<br>&amp; hospitality</div>
+        <span class="status-mini open">Now Open</span>
+      </a>
+      <a href="#rituals" class="pillar-item">
+        <svg class="glyph" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><g transform="translate(-4.90, -21.09) scale(0.1075)"><g transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"><path d="M4980 4254 c-69 -8 -170 -20 -225 -26 -55 -6 -115 -17 -134 -24 -18 -8 -46 -14 -61 -14 -15 0 -91 -13 -168 -30 -78 -16 -157 -30 -176 -30 -49 0 -158 -27 -219 -54 -29 -12 -83 -30 -122 -40 -38 -9 -90 -29 -115 -44 -50 -30 -85 -50 -145 -83 -22 -12 -53 -31 -70 -44 -16 -12 -50 -32 -75 -45 -46 -23 -109 -74 -183 -146 -23 -23 -52 -47 -64 -53 -29 -15 -107 -118 -151 -200 -19 -36 -48 -91 -64 -121 -16 -30 -36 -66 -44 -80 -7 -14 -14 -35 -14 -47 0 -13 -9 -55 -20 -95 -57 -212 -58 -327 -5 -536 45 -176 64 -217 197 -420 66 -102 301 -322 344 -322 7 0 33 -16 58 -35 25 -19 66 -44 91 -56 24 -11 49 -27 56 -35 6 -8 17 -14 24 -14 6 0 43 -17 81 -37 51 -27 116 -47 254 -80 102 -24 219 -52 260 -63 116 -30 326 -71 420 -81 197 -22 804 -4 873 25 17 8 69 19 115 25 84 10 264 49 357 76 28 8 76 17 108 20 92 10 316 103 391 163 16 12 33 22 39 22 6 0 24 11 41 24 17 12 47 31 66 41 19 10 79 57 134 104 54 47 117 100 140 118 131 100 313 442 352 661 69 388 -59 767 -356 1060 -65 63 -216 169 -388 271 -59 34 -156 72 -252 98 -30 8 -98 26 -150 39 -52 14 -108 30 -125 35 -250 75 -762 110 -1075 73z"/><path d="M4999 1241 c-303 -98 -496 -268 -579 -510 -43 -126 -47 -219 -10 -238 31 -16 1582 -19 1624 -3 14 5 28 20 31 32 7 29 -21 173 -40 202 -7 12 -19 40 -26 63 -26 90 -222 293 -340 353 -24 13 -59 36 -77 51 -18 16 -45 31 -60 34 -15 3 -49 13 -77 22 -35 12 -96 17 -205 20 -147 2 -160 1 -241 -26z"/></g></g></svg>
+        <div class="num">02</div>
+        <h4>Rituals</h4>
+        <div class="sub">Candles<br>&amp; ritual objects</div>
+        <span class="status-mini">In Development</span>
+      </a>
+      <a href="#wellness" class="pillar-item">
+        <svg class="glyph" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><g transform="translate(6.30, -15.69) scale(0.1075)"><g transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"><path d="M3340 4910 c-66 -66 -138 -288 -179 -551 -21 -137 -49 -209 -80 -209 -28 0 -45 55 -86 290 -52 290 -95 376 -173 341 -24 -11 -92 -140 -92 -174 0 -9 -12 -45 -26 -79 -17 -42 -29 -94 -35 -162 -6 -56 -17 -127 -25 -159 -11 -46 -14 -134 -13 -405 1 -520 26 -795 87 -947 10 -27 32 -88 47 -135 72 -219 212 -439 397 -619 152 -148 243 -207 374 -240 304 -77 701 -80 986 -7 159 41 150 37 289 133 179 125 367 330 448 490 16 33 44 85 62 114 32 55 56 115 89 229 10 36 24 78 29 93 6 14 27 106 48 204 l37 178 0 285 c0 230 -4 303 -18 380 -10 52 -26 154 -36 225 -19 130 -76 404 -105 503 -22 71 -101 176 -137 180 -36 4 -70 -29 -93 -93 -10 -28 -28 -77 -40 -110 -13 -33 -35 -109 -50 -168 -14 -60 -35 -131 -46 -158 -10 -27 -19 -57 -19 -67 0 -9 -14 -44 -30 -77 -16 -33 -30 -66 -30 -74 0 -8 -11 -29 -26 -48 -48 -63 -104 -32 -104 57 0 26 -6 66 -14 91 -7 24 -19 76 -25 114 -7 39 -25 126 -41 195 -16 69 -34 155 -41 192 -25 148 -124 163 -159 24 -6 -22 -15 -52 -21 -65 -6 -14 -23 -92 -39 -175 -16 -83 -36 -182 -44 -221 -8 -38 -19 -114 -25 -167 -12 -121 -25 -152 -67 -156 -20 -2 -36 4 -47 16 -22 24 -145 494 -181 692 -29 158 -48 200 -87 200 -36 0 -73 -104 -104 -294 -8 -49 -26 -137 -39 -195 -14 -58 -27 -130 -31 -160 -8 -70 -20 -91 -51 -91 -28 0 -78 69 -90 124 -3 17 -13 44 -21 59 -12 24 -50 160 -84 297 -10 42 -124 278 -146 303 -21 23 -68 22 -93 -3z"/><path d="M3874 1470 c-97 -19 -249 -79 -274 -108 -8 -9 -34 -29 -57 -45 -24 -15 -43 -31 -43 -35 0 -4 -20 -31 -44 -61 -52 -64 -101 -174 -115 -260 -5 -34 -13 -65 -16 -71 -3 -5 3 -18 15 -30 20 -20 29 -20 713 -20 546 0 697 3 717 13 48 25 24 136 -58 272 -121 200 -187 251 -415 324 -127 40 -292 48 -423 21z"/></g></g></svg>
+        <div class="num">03</div>
+        <h4>Wellness</h4>
+        <div class="sub">Ritual, recovery<br>&amp; intentional wellbeing</div>
+        <span class="status-mini">In Development</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PILLAR 01 / DINING SANCTUARY ============== -->
+<section class="chapter tone-cream" id="dining">
+  <div class="container">
+    <div class="chapter-inner">
+      <div class="chapter-copy reveal">
+        <div class="chapter-marker">
+          <span class="line"></span>
+          <span class="num">01 / 03</span>
+          <span>Dining Sanctuary</span>
+        </div>
+        <h2>Dining Sanctuary<small>Slow Dining in the Dandenong Ranges</small></h2>
+        <p class="chapter-tagline">Where nourishment becomes ritual.</p>
+        <div class="chapter-body">
+          <p>Nestled in the lush green of the Dandenong Ranges, Dining Sanctuary is a retreat from the pace of the everyday. An hour from the city, a world away in feeling.</p>
+          <p>Here, dining is unhurried. Seasonal menus, soulful flavours, and quiet rooms designed to slow the mind and open the senses. A place to gather, to linger, and to feel a little more whole.</p>
+        </div>
+        <a href="#" class="chapter-cta">Reserve a Table <span>→</span></a>
+      </div>
+      <div class="chapter-visual reveal d-1">
+        <div class="canvas canvas-dining"></div>
+        <div class="chapter-mark"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><g transform="translate(9.30, -21.88) scale(0.1042)"><g transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"><path d="M4190 3590 c-260 -4 -437 -11 -457 -17 -17 -6 -132 -14 -255 -18 -139 -4 -268 -14 -343 -25 -66 -11 -174 -24 -240 -30 -228 -20 -310 -30 -413 -50 -56 -11 -134 -20 -172 -20 -38 0 -102 -7 -142 -15 -40 -9 -104 -20 -143 -26 -190 -27 -193 -146 -11 -492 20 -38 36 -76 36 -86 0 -9 7 -26 15 -38 9 -12 22 -40 29 -61 27 -75 106 -232 140 -276 19 -25 42 -68 51 -95 9 -28 20 -53 25 -56 5 -3 34 -41 64 -85 75 -106 280 -316 351 -360 32 -19 92 -58 134 -86 157 -104 266 -160 376 -190 50 -14 115 -34 145 -44 249 -84 953 -78 1167 9 26 10 72 27 102 36 68 21 215 100 261 141 19 17 55 44 80 61 124 85 312 306 395 464 11 21 32 51 46 66 63 69 162 267 190 378 6 28 23 68 35 91 13 22 24 50 24 61 0 11 12 38 27 59 24 36 73 153 110 264 28 86 68 185 95 237 48 94 50 180 3 201 -28 13 -912 14 -1725 2z"/><path d="M3850 1333 c-229 -39 -348 -91 -442 -196 -37 -41 -77 -92 -89 -114 -13 -21 -28 -45 -35 -53 -18 -22 -104 -284 -104 -318 0 -17 8 -39 18 -51 l17 -21 850 -1 850 0 22 26 c34 39 30 58 -44 202 -201 389 -447 546 -848 542 -60 -1 -148 -8 -195 -16z"/></g></g></svg></div>
+        <div class="label">
+          <span>01 · Dining</span>
+          <span>The Origin</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PILLAR 02 / RITUALS ============== -->
+<section class="chapter tone-soft" id="rituals">
+  <div class="container">
+    <div class="chapter-inner reverse">
+      <div class="chapter-copy reveal d-1">
+        <div class="chapter-marker">
+          <span class="line"></span>
+          <span class="num">02 / 03</span>
+          <span>Rituals</span>
+        </div>
+        <h2>Rituals<small>Objects for Slow Living</small></h2>
+        <p class="chapter-tagline">The feeling of Still &amp; Social, carried home.</p>
+        <div class="chapter-body">
+          <p>A considered collection of objects made to bring the calm of the sanctuary into everyday life. Beginning with a single candle.</p>
+          <p>Made slowly. Made with intention. Made to be lived with.</p>
+        </div>
+        <div class="chapter-stanza">
+          <span>Scent that softens a room.</span>
+          <span>Objects that invite a pause.</span>
+          <span class="key">Rituals you can keep, long after the moment has passed.</span>
+          <span style="margin-top:1em;">A way to bring presence home.</span>
+        </div>
+        <div class="chapter-status"><span class="ind"></span>In Development</div>
+        <a href="#signup" class="chapter-cta">Join the List <span>&#8594;</span></a>
+      </div>
+      <div class="chapter-visual reveal">
+        <div class="canvas canvas-retreat"></div>
+        <div class="chapter-mark"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><g transform="translate(-4.90, -21.09) scale(0.1075)"><g transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"><path d="M4980 4254 c-69 -8 -170 -20 -225 -26 -55 -6 -115 -17 -134 -24 -18 -8 -46 -14 -61 -14 -15 0 -91 -13 -168 -30 -78 -16 -157 -30 -176 -30 -49 0 -158 -27 -219 -54 -29 -12 -83 -30 -122 -40 -38 -9 -90 -29 -115 -44 -50 -30 -85 -50 -145 -83 -22 -12 -53 -31 -70 -44 -16 -12 -50 -32 -75 -45 -46 -23 -109 -74 -183 -146 -23 -23 -52 -47 -64 -53 -29 -15 -107 -118 -151 -200 -19 -36 -48 -91 -64 -121 -16 -30 -36 -66 -44 -80 -7 -14 -14 -35 -14 -47 0 -13 -9 -55 -20 -95 -57 -212 -58 -327 -5 -536 45 -176 64 -217 197 -420 66 -102 301 -322 344 -322 7 0 33 -16 58 -35 25 -19 66 -44 91 -56 24 -11 49 -27 56 -35 6 -8 17 -14 24 -14 6 0 43 -17 81 -37 51 -27 116 -47 254 -80 102 -24 219 -52 260 -63 116 -30 326 -71 420 -81 197 -22 804 -4 873 25 17 8 69 19 115 25 84 10 264 49 357 76 28 8 76 17 108 20 92 10 316 103 391 163 16 12 33 22 39 22 6 0 24 11 41 24 17 12 47 31 66 41 19 10 79 57 134 104 54 47 117 100 140 118 131 100 313 442 352 661 69 388 -59 767 -356 1060 -65 63 -216 169 -388 271 -59 34 -156 72 -252 98 -30 8 -98 26 -150 39 -52 14 -108 30 -125 35 -250 75 -762 110 -1075 73z"/><path d="M4999 1241 c-303 -98 -496 -268 -579 -510 -43 -126 -47 -219 -10 -238 31 -16 1582 -19 1624 -3 14 5 28 20 31 32 7 29 -21 173 -40 202 -7 12 -19 40 -26 63 -26 90 -222 293 -340 353 -24 13 -59 36 -77 51 -18 16 -45 31 -60 34 -15 3 -49 13 -77 22 -35 12 -96 17 -205 20 -147 2 -160 1 -241 -26z"/></g></g></svg></div>
+        <div class="label">
+          <span>02 · Rituals</span>
+          <span>The Ritual at Home</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PILLAR 03 / WELLNESS ============== -->
+<section class="chapter tone-sage" id="wellness">
+  <div class="container">
+    <div class="chapter-inner">
+      <div class="chapter-copy reveal">
+        <div class="chapter-marker">
+          <span class="line"></span>
+          <span class="num">03 / 03</span>
+          <span>Wellness</span>
+        </div>
+        <h2>Wellness<small>Ritual · Recovery · Intentional Wellbeing</small></h2>
+        <p class="chapter-tagline">A quieter way to return to yourself.</p>
+        <div class="chapter-body">
+          <p>Restorative experiences designed around ritual, recovery, and intentional wellbeing. A space to slow the body and soften the mind.</p>
+          <p>Not performance. Not pressure. Presence.</p>
+        </div>
+        <div class="chapter-stanza">
+          <span>Practices that build calm, not noise.</span>
+          <span>Recovery that honours the body.</span>
+          <span class="key">Wellbeing as a ritual, not a routine.</span>
+          <span style="margin-top:1em;">This is where people come to restore.</span>
+        </div>
+        <div class="chapter-status"><span class="ind"></span>In Development</div>
+        <a href="#signup" class="chapter-cta">Join the List <span>&#8594;</span></a>
+      </div>
+      <div class="chapter-visual reveal d-1">
+        <div class="canvas canvas-club"></div>
+        <div class="chapter-mark"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><g transform="translate(6.30, -15.69) scale(0.1075)"><g transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"><path d="M3340 4910 c-66 -66 -138 -288 -179 -551 -21 -137 -49 -209 -80 -209 -28 0 -45 55 -86 290 -52 290 -95 376 -173 341 -24 -11 -92 -140 -92 -174 0 -9 -12 -45 -26 -79 -17 -42 -29 -94 -35 -162 -6 -56 -17 -127 -25 -159 -11 -46 -14 -134 -13 -405 1 -520 26 -795 87 -947 10 -27 32 -88 47 -135 72 -219 212 -439 397 -619 152 -148 243 -207 374 -240 304 -77 701 -80 986 -7 159 41 150 37 289 133 179 125 367 330 448 490 16 33 44 85 62 114 32 55 56 115 89 229 10 36 24 78 29 93 6 14 27 106 48 204 l37 178 0 285 c0 230 -4 303 -18 380 -10 52 -26 154 -36 225 -19 130 -76 404 -105 503 -22 71 -101 176 -137 180 -36 4 -70 -29 -93 -93 -10 -28 -28 -77 -40 -110 -13 -33 -35 -109 -50 -168 -14 -60 -35 -131 -46 -158 -10 -27 -19 -57 -19 -67 0 -9 -14 -44 -30 -77 -16 -33 -30 -66 -30 -74 0 -8 -11 -29 -26 -48 -48 -63 -104 -32 -104 57 0 26 -6 66 -14 91 -7 24 -19 76 -25 114 -7 39 -25 126 -41 195 -16 69 -34 155 -41 192 -25 148 -124 163 -159 24 -6 -22 -15 -52 -21 -65 -6 -14 -23 -92 -39 -175 -16 -83 -36 -182 -44 -221 -8 -38 -19 -114 -25 -167 -12 -121 -25 -152 -67 -156 -20 -2 -36 4 -47 16 -22 24 -145 494 -181 692 -29 158 -48 200 -87 200 -36 0 -73 -104 -104 -294 -8 -49 -26 -137 -39 -195 -14 -58 -27 -130 -31 -160 -8 -70 -20 -91 -51 -91 -28 0 -78 69 -90 124 -3 17 -13 44 -21 59 -12 24 -50 160 -84 297 -10 42 -124 278 -146 303 -21 23 -68 22 -93 -3z"/><path d="M3874 1470 c-97 -19 -249 -79 -274 -108 -8 -9 -34 -29 -57 -45 -24 -15 -43 -31 -43 -35 0 -4 -20 -31 -44 -61 -52 -64 -101 -174 -115 -260 -5 -34 -13 -65 -16 -71 -3 -5 3 -18 15 -30 20 -20 29 -20 713 -20 546 0 697 3 717 13 48 25 24 136 -58 272 -121 200 -187 251 -415 324 -127 40 -292 48 -423 21z"/></g></g></svg></div>
+        <div class="label">
+          <span>03 · Wellness</span>
+          <span>The Return</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== VALUES ============== -->
+<section class="values" id="values">
+  <div class="container">
+    <h2 class="reveal">What we <em>cherish</em>.</h2>
+    <p class="values-lede reveal d-1">A few quiet beliefs sit at the heart of everything we do. They shape how we gather, how we serve, and how we leave space for what matters.</p>
+
+    <div class="values-list">
+      <div class="value-row reveal">
+        <div class="label">Nourishment</div>
+        <div class="desc">We nourish mind, body, and soul through every experience, whether food, ritual, or the feeling of a room.</div>
+      </div>
+      <div class="value-row reveal d-1">
+        <div class="label">Warmth</div>
+        <div class="desc">We create welcoming spaces where everyone feels seen, comfortable, and at home. Service offered with heart.</div>
+      </div>
+      <div class="value-row reveal d-2">
+        <div class="label">Authenticity</div>
+        <div class="desc">We stay true to who we are, and invite others to be themselves. Genuine, grounded, and free from pretence.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== JOURNAL ============== -->
+<section class="section" id="journal">
+  <div class="container">
+    <div class="section-head">
+      <div class="reveal">
+        <div class="eyebrow"><span class="dot"></span>Journal</div>
+        <h2>Notes from <em>the</em> sanctuary.</h2>
+      </div>
+      <p class="lede reveal d-1">Quiet writing on slow living, gathering, hospitality, and the rituals that shape a more intentional life.</p>
+    </div>
+
+    <div class="journal-grid">
+      <article class="article reveal">
+        <div class="article-img"><div class="ph ph-pause"></div></div>
+        <div class="article-meta"><span>Essay</span><span class="sep"></span><span>5 min read</span></div>
+        <h3>The Beauty in the Pause</h3>
+        <p>On the small moments between movement, and why the half-second before a meal can matter as much as the meal itself.</p>
+      </article>
+
+      <article class="article reveal d-1">
+        <div class="article-img"><div class="ph ph-gather"></div></div>
+        <div class="article-meta"><span>Field Note</span><span class="sep"></span><span>4 min read</span></div>
+        <h3>The Art of Gathering</h3>
+        <p>What a shared table teaches us about presence, attention, and the kind of hospitality that lingers long after the plates are cleared.</p>
+      </article>
+
+      <article class="article reveal d-2">
+        <div class="article-img"><div class="ph ph-home"></div></div>
+        <div class="article-meta"><span>Ritual</span><span class="sep"></span><span>3 min read</span></div>
+        <h3>Bringing Ritual Home</h3>
+        <p>Three small rituals to soften the noise of an ordinary day, and a quiet invitation to make them your own.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============== NORTH STAR ============== -->
+<section class="northstar">
+  <div class="container">
+    <svg class="northstar-mark reveal" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><g transform="translate(9.30, -21.88) scale(0.1042)"><g transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"><path d="M4190 3590 c-260 -4 -437 -11 -457 -17 -17 -6 -132 -14 -255 -18 -139 -4 -268 -14 -343 -25 -66 -11 -174 -24 -240 -30 -228 -20 -310 -30 -413 -50 -56 -11 -134 -20 -172 -20 -38 0 -102 -7 -142 -15 -40 -9 -104 -20 -143 -26 -190 -27 -193 -146 -11 -492 20 -38 36 -76 36 -86 0 -9 7 -26 15 -38 9 -12 22 -40 29 -61 27 -75 106 -232 140 -276 19 -25 42 -68 51 -95 9 -28 20 -53 25 -56 5 -3 34 -41 64 -85 75 -106 280 -316 351 -360 32 -19 92 -58 134 -86 157 -104 266 -160 376 -190 50 -14 115 -34 145 -44 249 -84 953 -78 1167 9 26 10 72 27 102 36 68 21 215 100 261 141 19 17 55 44 80 61 124 85 312 306 395 464 11 21 32 51 46 66 63 69 162 267 190 378 6 28 23 68 35 91 13 22 24 50 24 61 0 11 12 38 27 59 24 36 73 153 110 264 28 86 68 185 95 237 48 94 50 180 3 201 -28 13 -912 14 -1725 2z"/><path d="M3850 1333 c-229 -39 -348 -91 -442 -196 -37 -41 -77 -92 -89 -114 -13 -21 -28 -45 -35 -53 -18 -22 -104 -284 -104 -318 0 -17 8 -39 18 -51 l17 -21 850 -1 850 0 22 26 c34 39 30 58 -44 202 -201 389 -447 546 -848 542 -60 -1 -148 -8 -195 -16z"/></g></g></svg>
+    <div class="eyebrow reveal d-1"><span class="dot"></span>North Star</div>
+    <h2 class="reveal d-2">Where stillness <em>meets</em> connection.</h2>
+    <div class="northstar-attr reveal d-3">The Still &amp; Social Promise</div>
+  </div>
+</section>
+
+<!-- ============== SIGNUP ============== -->
+<section class="signup" id="signup">
+  <div class="container signup-inner">
+    <div class="eyebrow reveal"><span class="dot"></span>The Next Chapter</div>
+    <h2 class="reveal d-1">Be the first to <em>enter</em> the next chapter.</h2>
+    <p class="signup-body reveal d-2">Join us for the quiet stuff. New rituals, slow releases, and the occasional letter from the world of Still &amp; Social. No noise. Just what matters.</p>
+    <form class="signup-form reveal d-2" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Thank you'; this.querySelector('input').value='';">
+      <input type="email" placeholder="your@email.com" required aria-label="Email address" />
+      <button type="submit">Join the list</button>
+    </form>
+    <div class="signup-fineprint reveal d-3">No noise. Only what matters.</div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg class="footer-brand-icon" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><g transform="translate(9.30, -21.88) scale(0.1042)"><g transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"><path d="M4190 3590 c-260 -4 -437 -11 -457 -17 -17 -6 -132 -14 -255 -18 -139 -4 -268 -14 -343 -25 -66 -11 -174 -24 -240 -30 -228 -20 -310 -30 -413 -50 -56 -11 -134 -20 -172 -20 -38 0 -102 -7 -142 -15 -40 -9 -104 -20 -143 -26 -190 -27 -193 -146 -11 -492 20 -38 36 -76 36 -86 0 -9 7 -26 15 -38 9 -12 22 -40 29 -61 27 -75 106 -232 140 -276 19 -25 42 -68 51 -95 9 -28 20 -53 25 -56 5 -3 34 -41 64 -85 75 -106 280 -316 351 -360 32 -19 92 -58 134 -86 157 -104 266 -160 376 -190 50 -14 115 -34 145 -44 249 -84 953 -78 1167 9 26 10 72 27 102 36 68 21 215 100 261 141 19 17 55 44 80 61 124 85 312 306 395 464 11 21 32 51 46 66 63 69 162 267 190 378 6 28 23 68 35 91 13 22 24 50 24 61 0 11 12 38 27 59 24 36 73 153 110 264 28 86 68 185 95 237 48 94 50 180 3 201 -28 13 -912 14 -1725 2z"/><path d="M3850 1333 c-229 -39 -348 -91 -442 -196 -37 -41 -77 -92 -89 -114 -13 -21 -28 -45 -35 -53 -18 -22 -104 -284 -104 -318 0 -17 8 -39 18 -51 l17 -21 850 -1 850 0 22 26 c34 39 30 58 -44 202 -201 389 -447 546 -848 542 -60 -1 -148 -8 -195 -16z"/></g></g></svg>
+        <h3>Still <em>&amp;</em> Social</h3>
+        <p>A soulful sanctuary in a fast-paced world. A space to slow down, eat well, and feel more. Shaped by the rituals of good living.</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>The World</h5>
+        <ul>
+          <li><a href="#dining">Dining Sanctuary</a></li>
+          <li><a href="#rituals">Rituals <span class="tag">Soon</span></a></li>
+          <li><a href="#wellness">Wellness <span class="tag">Soon</span></a></li>
+          <li><a href="#manifesto">Our Story</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="#">Instagram →</a></li>
+          <li><a href="mailto:info@stillandsocial.com">info@stillandsocial.com</a></li>
+          <li><a href="#signup">Join the list</a></li>
+          <li><a href="#">Press &amp; Enquiries</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Still &amp; Social · Rituals of Good Living</span>
+      <span>Where stillness meets connection</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav background on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    nav.classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => nav.classList.remove('open'))
+  );
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
