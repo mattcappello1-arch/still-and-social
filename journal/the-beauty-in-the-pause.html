@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Beauty in the Pause — Still & Social</title>
+<meta name="description" content="Some of life's most meaningful moments are the ones we pause long enough to notice. A reflection on presence and the ritual of good living." />
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Google+Sans+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --cream: #F5F1DD; --cream-soft: #EFEAD2; --oatmeal: #C9BDA5;
+    --rosewood: #7E5B5F; --sienna: #9F5136; --coffee: #59493A;
+    --charcoal: #241F21; --ink: #2B2620; --ink-soft: #5C544A;
+    --rule: rgba(43, 38, 32, 0.12);
+    --serif: 'Cormorant Garamond', 'Didot', Georgia, serif;
+    --mono: 'Google Sans Code', ui-monospace, Menlo, monospace;
+    --max: 1320px; --gutter: clamp(20px, 4vw, 56px);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--cream); color: var(--ink);
+    font-family: var(--mono); font-size: 14px; line-height: 1.7;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.32; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16  0 0 0 0 0.13  0 0 0 0 0.10  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); position: relative; z-index: 2; }
+
+  .journal-nav {
+    padding: 28px 0; border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .journal-nav a {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--ink-soft); transition: color 0.3s;
+  }
+  .journal-nav a:hover { color: var(--sienna); }
+
+  .journal-header {
+    padding: clamp(80px, 12vw, 160px) 0 clamp(48px, 6vw, 80px);
+    text-align: center; max-width: 720px; margin: 0 auto;
+  }
+  .journal-header .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--sienna); margin-bottom: 28px;
+  }
+  .journal-header h1 {
+    font-family: var(--serif); font-weight: 300; font-size: clamp(40px, 6vw, 80px);
+    line-height: 1.05; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--ink); margin: 0 0 28px;
+  }
+  .journal-header h1 em { font-style: italic; color: var(--sienna); }
+  .journal-header .lede {
+    font-family: var(--mono); font-size: 14px; line-height: 1.9;
+    color: var(--ink-soft); max-width: 52ch; margin: 0 auto;
+  }
+
+  .journal-body {
+    max-width: 640px; margin: 0 auto;
+    padding: 0 0 clamp(100px, 14vw, 200px);
+  }
+  .journal-body p {
+    font-family: var(--mono); font-size: 14px; line-height: 2.2;
+    color: var(--ink-soft); margin: 0 0 1.8em; letter-spacing: 0.01em;
+  }
+  .journal-body p:last-child { margin-bottom: 0; }
+  .journal-body .divider {
+    text-align: center; margin: 2.4em 0; color: var(--oatmeal);
+    letter-spacing: 1em; font-size: 10px;
+  }
+
+  .journal-footer {
+    border-top: 1px solid var(--rule); padding: 48px 0;
+    text-align: center;
+  }
+  .journal-footer a {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--sienna);
+    border-bottom: 1px solid var(--sienna); padding-bottom: 4px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .journal-footer a:hover { color: var(--ink); border-color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <nav class="journal-nav">
+    <a href="/">← Back to Still & Social</a>
+    <a href="/#journal">Journal</a>
+  </nav>
+</div>
+
+<div class="container journal-header">
+  <div class="eyebrow">Journal</div>
+  <h1>The Beauty in <em>the Pause</em></h1>
+  <p class="lede">Some of life's most meaningful moments are the ones we pause long enough to notice. A reflection on presence and the ritual of good living.</p>
+</div>
+
+<div class="container journal-body">
+  <p>At Still & Social, we often find ourselves returning to a simple belief.</p>
+
+  <p>That some of the most meaningful moments in life are not the loudest, busiest, or most celebrated.</p>
+
+  <p>They are often the quiet moments in between.</p>
+
+  <p>The moments where we pause long enough to notice.</p>
+
+  <p>The warmth of the morning sun.<br>
+  A conversation that unfolds without rushing.<br>
+  The comfort of a familiar ritual.<br>
+  The feeling of being fully present, exactly where we are.</p>
+
+  <div class="divider">· · ·</div>
+
+  <p>In a world that moves quickly, we believe there is something special about creating space for these moments.</p>
+
+  <p>Not to escape life, but to experience it more deeply.</p>
+
+  <p>This belief sits at the heart of Still & Social.</p>
+
+  <p>It shapes how we gather, how we connect, and how we choose to move through the world.</p>
+
+  <p>We call it the ritual of good living.</p>
+
+  <p>Not a destination to reach, but a way of being.</p>
+
+  <p>A reminder to slow down when we can.<br>
+  To appreciate what is already here.<br>
+  To find beauty in the ordinary.<br>
+  And to create space for the things that matter most.</p>
+
+  <div class="divider">· · ·</div>
+
+  <p>This journal is an invitation into that world.</p>
+
+  <p>A collection of reflections, stories and ideas inspired by presence, connection and intentional living.</p>
+
+  <p>A place to pause.<br>
+  A place to gather.<br>
+  A place to return to.</p>
+
+  <p>Welcome to Still & Social.</p>
+</div>
+
+<div class="container journal-footer">
+  <a href="/#journal">← Back to Journal</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Art of Gathering — Still & Social</title>
+<meta name="description" content="A reflection on belonging, connection, and the spaces that bring us together." />
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Google+Sans+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --cream: #F5F1DD; --cream-soft: #EFEAD2; --oatmeal: #C9BDA5;
+    --rosewood: #7E5B5F; --sienna: #9F5136; --coffee: #59493A;
+    --charcoal: #241F21; --ink: #2B2620; --ink-soft: #5C544A;
+    --rule: rgba(43, 38, 32, 0.12);
+    --serif: 'Cormorant Garamond', 'Didot', Georgia, serif;
+    --mono: 'Google Sans Code', ui-monospace, Menlo, monospace;
+    --max: 1320px; --gutter: clamp(20px, 4vw, 56px);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--cream); color: var(--ink);
+    font-family: var(--mono); font-size: 14px; line-height: 1.7;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.32; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16  0 0 0 0 0.13  0 0 0 0 0.10  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); position: relative; z-index: 2; }
+
+  .journal-nav {
+    padding: 28px 0; border-bottom: 1px solid var(--rule);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .journal-nav a {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--ink-soft); transition: color 0.3s;
+  }
+  .journal-nav a:hover { color: var(--sienna); }
+
+  .journal-header {
+    padding: clamp(80px, 12vw, 160px) 0 clamp(48px, 6vw, 80px);
+    text-align: center; max-width: 720px; margin: 0 auto;
+  }
+  .journal-header .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--sienna); margin-bottom: 28px;
+  }
+  .journal-header h1 {
+    font-family: var(--serif); font-weight: 300; font-size: clamp(40px, 6vw, 80px);
+    line-height: 1.05; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--ink); margin: 0 0 28px;
+  }
+  .journal-header h1 em { font-style: italic; color: var(--sienna); }
+  .journal-header .lede {
+    font-family: var(--mono); font-size: 14px; line-height: 1.9;
+    color: var(--ink-soft); max-width: 52ch; margin: 0 auto;
+  }
+
+  .journal-body {
+    max-width: 640px; margin: 0 auto;
+    padding: 0 0 clamp(100px, 14vw, 200px);
+  }
+  .journal-body p {
+    font-family: var(--mono); font-size: 14px; line-height: 2.2;
+    color: var(--ink-soft); margin: 0 0 1.8em; letter-spacing: 0.01em;
+  }
+  .journal-body p:last-child { margin-bottom: 0; }
+  .journal-body .divider {
+    text-align: center; margin: 2.4em 0; color: var(--oatmeal);
+    letter-spacing: 1em; font-size: 10px;
+  }
+
+  .journal-footer {
+    border-top: 1px solid var(--rule); padding: 48px 0;
+    text-align: center;
+  }
+  .journal-footer a {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--sienna);
+    border-bottom: 1px solid var(--sienna); padding-bottom: 4px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .journal-footer a:hover { color: var(--ink); border-color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <nav class="journal-nav">
+    <a href="/">← Back to Still & Social</a>
+    <a href="/#journal">Journal</a>
+  </nav>
+</div>
+
+<div class="container journal-header">
+  <div class="eyebrow">Journal</div>
+  <h1>The Art of <em>Gathering</em></h1>
+  <p class="lede">A reflection on belonging, connection, and the spaces that bring us together.</p>
+</div>
+
+<div class="container journal-body">
+  <p>At its heart, gathering is not about bringing people together.</p>
+
+  <p>It is about creating a space where people feel they belong.</p>
+
+  <p>A space where conversation flows naturally. Where laughter is shared freely. Where we feel welcomed exactly as we are.</p>
+
+  <p>These moments may seem simple, yet they often become the ones we carry with us.</p>
+
+  <p>A long conversation that lingers in our minds.<br>
+  An evening spent in good company.<br>
+  The feeling of being seen, understood, and connected.</p>
+
+  <div class="divider">· · ·</div>
+
+  <p>At Still & Social, we believe gathering is one of life's most meaningful rituals.</p>
+
+  <p>Not because of the occasion.</p>
+
+  <p>But because of what becomes possible when people come together with intention.</p>
+
+  <p>Connection.<br>
+  Presence.<br>
+  A sense of belonging.</p>
+
+  <p>In a world that often encourages us to move quickly, gathering invites us to slow down and make space for one another.</p>
+
+  <p>To listen more deeply.<br>
+  To share more openly.<br>
+  To appreciate the people who shape our lives.</p>
+
+  <div class="divider">· · ·</div>
+
+  <p>The art of gathering is not found in perfection.</p>
+
+  <p>It is found in warmth.<br>
+  In generosity.<br>
+  In creating an environment where people can simply be themselves.</p>
+
+  <p>Because some of life's most meaningful moments are not created through grand gestures.</p>
+
+  <p>They are created when people feel connected to something greater than themselves.</p>
+
+  <p>A conversation.<br>
+  A community.<br>
+  A shared experience.<br>
+  A moment of belonging.</p>
+
+  <p>Perhaps that is why gathering has always mattered.</p>
+
+  <p>It reminds us that a life well lived is rarely built alone.</p>
+
+  <p>It is shaped through the people we welcome, the moments we share, and the connections we choose to nurture along the way.</p>
+</div>
+
+<div class="container journal-footer">
+  <a href="/#journal">← Back to Journal</a>
+</div>
+
+</body>
+</html>
