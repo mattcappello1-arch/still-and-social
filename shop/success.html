@@ -37,11 +37,15 @@
   <h1>Thank you.</h1>
   <p>Your order is on its way. We'll send you a confirmation email with tracking details once it ships.</p>
   <p>We hope this small ritual brings a moment of pause to your day.</p>
-  <a class="back" href="/shop/">Back to Shop</a>
+  <a class="back" href="/shop/catalogue.html">Back to Shop</a>
 </main>
 <footer>
   <span>Still &amp; Social &middot; Rituals of Good Living</span>
   <a href="https://stillandsocial.com.au" style="text-decoration:none">stillandsocial.com.au</a>
 </footer>
+<script>
+/* Clear cart after successful checkout */
+try { localStorage.removeItem("ss_cart"); } catch(e) {}
+</script>
 </body>
 </html>

@@ -17,21 +17,31 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const { priceId, quantity } = req.body;
+    let lineItems = [];
 
-    if (!priceId) {
-      return res.status(400).json({ error: 'priceId is required' });
+    // Support new multi-item format: { items: [{priceId, quantity}, ...] }
+    if (req.body.items && Array.isArray(req.body.items)) {
+      lineItems = req.body.items.map(item => ({
+        price: item.priceId,
+        quantity: item.quantity || 1,
+      }));
+    }
+    // Backward compat: single item format { priceId, quantity }
+    else if (req.body.priceId) {
+      lineItems = [{
+        price: req.body.priceId,
+        quantity: req.body.quantity || 1,
+      }];
+    }
+
+    if (lineItems.length === 0) {
+      return res.status(400).json({ error: 'At least one item is required' });
     }
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       ui_mode: 'embedded',
-      line_items: [
-        {
-          price: priceId,
-          quantity: quantity || 1,
-        },
-      ],
+      line_items: lineItems,
       shipping_address_collection: {
         allowed_countries: ['AU'],
       },

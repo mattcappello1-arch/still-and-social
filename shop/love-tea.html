@@ -78,7 +78,7 @@
 
   .madeto{font-size:12px;line-height:1.7;color:var(--coffee);margin:-4px 0 18px;padding:12px 14px;background:var(--cream)}
   .madeto b{font-weight:400;color:var(--char);letter-spacing:.04em}
-  .cta{display:block;width:100%;text-align:center;background:var(--char);color:var(--cream);text-decoration:none;padding:19px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;transition:background .25s}
+  .cta{display:block;width:100%;text-align:center;background:var(--char);color:var(--cream);text-decoration:none;padding:19px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;transition:background .25s;border:none;cursor:pointer;font-family:var(--mono)}
   .cta:hover{background:var(--coffee)}
   .assure{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:center;margin-top:16px;font-size:11px;color:var(--coffee);letter-spacing:.04em}
 
@@ -206,7 +206,7 @@
 
       <p class="madeto"><b>Made in Melbourne.</b> Ships within 5 business days.</p>
 
-      <a class="cta" id="checkout" href="#">Order now</a>
+      <button class="cta" id="add-to-cart">Add to cart</button>
       <div class="assure">
         <span>Secure checkout with Stripe</span><span>·</span>
         <span>Organic &amp; biodegradable</span><span>·</span>
@@ -264,52 +264,17 @@
 </div>
 
 <script src="https://js.stripe.com/v3/"></script>
+<script src="assets/cart.js"></script>
 <script>
-/* ---------- STRIPE ---------- */
-const STRIPE_PK = "pk_live_51Sh7aaRdn5OIpN4bta0NTatPqxrDxUDFOwa59dxRH6e4YWwP4GtcoJ1UTWx3pR6LlLMwyb8BCl5XmS7o0xFqCsFR00Aj2y9JTi";
+/* ---------- PRODUCT DATA ---------- */
 const PRICES = {
   tea:      "price_1UeWtQRdn5OIpN4bI2fTi7z6",
   teaTrio:  "price_1UeWtTRdn5OIpN4bkubgNKVW"
 };
-
-const stripe = Stripe(STRIPE_PK);
-let currentCheckout = null;
-
-async function openCheckout(priceId) {
-  const overlay = document.getElementById("checkout-overlay");
-  const mount = document.getElementById("checkout-mount");
-  overlay.classList.add("open");
-  mount.innerHTML = '<p style="text-align:center;padding:40px 0;color:var(--coffee);font-size:13px;letter-spacing:.06em">Loading checkout...</p>';
-
-  try {
-    const res = await fetch("/api/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ priceId, quantity: 1 })
-    });
-    const data = await res.json();
-    if (!data.clientSecret) throw new Error(data.error || "Failed to create session");
-
-    mount.innerHTML = "";
-    currentCheckout = await stripe.initEmbeddedCheckout({ clientSecret: data.clientSecret });
-    currentCheckout.mount("#checkout-mount");
-  } catch (err) {
-    mount.innerHTML = '<p style="text-align:center;padding:40px 0;color:#9F5136;font-size:13px">Something went wrong. Please try again.</p>';
-    console.error("Checkout error:", err);
-  }
-}
-
-function closeCheckout() {
-  const overlay = document.getElementById("checkout-overlay");
-  overlay.classList.remove("open");
-  if (currentCheckout) { currentCheckout.destroy(); currentCheckout = null; }
-  document.getElementById("checkout-mount").innerHTML = "";
-}
-
-document.getElementById("checkout-close").addEventListener("click", closeCheckout);
-document.getElementById("checkout-overlay").addEventListener("click", function(e) {
-  if (e.target === this) closeCheckout();
-});
+const PRODUCTS = {
+  tea:     { name: "Love Tea, Single", price: 50, image: "/shop/assets/img/love-tea-trio.jpg" },
+  teaTrio: { name: "3 Tea Gift Pack", price: 50, image: "/shop/assets/img/love-tea-trio.jpg" }
+};
 
 /* ---------- GALLERY ---------- */
 const IMAGES = [
@@ -329,16 +294,20 @@ thumbs.forEach((btn, i) => {
   };
 });
 
-/* ---------- VARIANT + CHECKOUT ---------- */
-function getSelectedPriceId() {
-  const v = document.querySelector('input[name="variant"]:checked').value;
-  return PRICES[v];
+/* ---------- ADD TO CART ---------- */
+function getSelectedVariant() {
+  return document.querySelector('input[name="variant"]:checked').value;
 }
 
-document.getElementById("checkout").addEventListener("click", function(e) {
+document.getElementById("add-to-cart").addEventListener("click", function(e) {
   e.preventDefault();
-  openCheckout(getSelectedPriceId());
+  const v = getSelectedVariant();
+  ssAddToCart({ priceId: PRICES[v], name: PRODUCTS[v].name, price: PRODUCTS[v].price, quantity: 1, image: PRODUCTS[v].image });
 });
+
+/* Checkout overlay close */
+document.getElementById("checkout-close").addEventListener("click", function(){ ssCloseCheckout(); });
+document.getElementById("checkout-overlay").addEventListener("click", function(e){ if(e.target === this) ssCloseCheckout(); });
 
 /* Nav scroll + mobile menu */
 const navEl = document.getElementById('nav');
