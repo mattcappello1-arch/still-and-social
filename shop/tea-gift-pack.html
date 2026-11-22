@@ -55,44 +55,44 @@
   .stage{aspect-ratio:4/5;background:var(--cream);overflow:hidden;position:relative}
   .stage img{width:100%;height:100%;object-fit:cover}
 
-  .buy{padding-top:12px}
-  .buy h1{font-family:var(--serif);font-weight:300;font-size:clamp(40px,4.4vw,60px);line-height:1.02;margin:18px 0 14px;letter-spacing:.01em}
-  .price{font-size:15px;letter-spacing:.08em}
-  .lede{font-family:var(--serif);font-size:21px;line-height:1.45;margin:28px 0 30px;max-width:30ch}
+  .buy{padding-top:24px}
+  .buy h1{font-family:var(--serif);font-weight:300;font-size:clamp(40px,4.4vw,60px);line-height:1.02;margin:18px 0 20px;letter-spacing:.01em}
+  .price{font-size:15px;letter-spacing:.08em;margin-bottom:8px}
+  .lede{font-family:var(--serif);font-size:21px;line-height:1.45;margin:32px 0 36px;max-width:30ch}
 
   /* Variant options */
-  fieldset{border:0;margin-bottom:26px}
+  fieldset{border:0;margin-bottom:30px}
   legend{margin-bottom:12px}
-  .opt{display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(36,31,33,.18);padding:16px 18px;margin-bottom:10px;cursor:pointer;transition:border-color .2s}
+  .opt{display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(36,31,33,.18);padding:18px 20px;margin-bottom:12px;cursor:pointer;transition:border-color .2s}
   .opt:has(input:checked){border-color:var(--char);background:var(--cream)}
   .opt input{position:absolute;opacity:0}
   .opt strong{font-weight:400;display:block;font-size:13px;letter-spacing:.04em}
   .opt em{font-style:normal;font-size:12px;color:var(--coffee)}
 
   /* Tea list */
-  .tealist{list-style:none;margin:0 0 30px;border-top:1px solid rgba(36,31,33,.12)}
+  .tealist{list-style:none;margin:0 0 20px;border-top:none}
   .tealist li{padding:18px 0;border-bottom:1px solid rgba(36,31,33,.12)}
   .tealist b{font-family:var(--serif);font-weight:300;font-size:22px;display:block}
   .tealist small{font-size:11px;color:var(--coffee);letter-spacing:.04em}
   .tealist span{display:block;font-size:13px;margin-top:4px;max-width:44ch}
 
-  .qty-wrap{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:18px;border:1px solid rgba(36,31,33,.18)}
+  .qty-wrap{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:22px;border:1px solid rgba(36,31,33,.18)}
   .qty-btn{width:48px;height:48px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--char);transition:background .2s;font-family:var(--mono)}
   .qty-btn:hover{background:var(--cream)}
   .qty-num{width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:14px;letter-spacing:.06em;border-left:1px solid rgba(36,31,33,.18);border-right:1px solid rgba(36,31,33,.18)}
 
-  .madeto{font-size:12px;line-height:1.7;color:var(--coffee);margin:-4px 0 18px;padding:12px 14px;background:var(--cream)}
+  .madeto{font-size:12px;line-height:1.7;color:var(--coffee);margin:8px 0 24px;padding:14px 16px;background:var(--cream)}
   .madeto b{font-weight:400;color:var(--char);letter-spacing:.04em}
-  .cta{display:block;width:100%;text-align:center;background:var(--char);color:var(--cream);text-decoration:none;padding:19px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;transition:background .25s;border:none;cursor:pointer;font-family:var(--mono)}
+  .cta{display:block;width:100%;text-align:center;background:var(--char);color:var(--cream);text-decoration:none;padding:21px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;transition:background .25s;border:none;cursor:pointer;font-family:var(--mono)}
   .cta:hover{background:var(--coffee)}
-  .assure{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:center;margin-top:16px;font-size:11px;color:var(--coffee);letter-spacing:.04em}
+  .assure{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:center;margin-top:20px;font-size:11px;color:var(--coffee);letter-spacing:.04em}
 
   details{border-bottom:1px solid rgba(36,31,33,.12)}
-  details:first-of-type{border-top:1px solid rgba(36,31,33,.12);margin-top:40px}
-  summary{list-style:none;cursor:pointer;padding:18px 0;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+  details:first-of-type{border-top:1px solid rgba(36,31,33,.12);margin-top:48px}
+  summary{list-style:none;cursor:pointer;padding:22px 0;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.22em;text-transform:uppercase}
   summary::after{content:"+";font-size:16px;line-height:1}
   details[open] summary::after{content:"–"}
-  details p,details ul{padding:0 0 20px;font-size:13px;max-width:52ch}
+  details p,details ul{padding:0 0 24px;font-size:13px;max-width:52ch}
   details ul{list-style:none}
   details li{padding-left:16px;position:relative}
   details li::before{content:"·";position:absolute;left:2px}
@@ -176,24 +176,26 @@
 
       <p class="lede">All three Love Tea blends, boxed together. Lemongrass & Ginger, Jasmine Green and Peppermint. The full pause.</p>
 
-      <p class="eyebrow" style="margin-bottom:14px">The blends</p>
-      <ul class="tealist">
-        <li>
-          <b>Lemongrass &amp; Ginger</b>
-          <small>Organic · 20 pyramids · 50g · caffeine free</small>
-          <span>Bright lemongrass with a warm edge of ginger. Lovely hot, or chilled over ice with lemon.</span>
-        </li>
-        <li>
-          <b>Jasmine Green</b>
-          <small>Organic · 20 pyramids · 40g · green tea</small>
-          <span>Green tea infused with hand-picked jasmine flowers. Soft and floral, and steeps more than once.</span>
-        </li>
-        <li>
-          <b>Peppermint</b>
-          <small>Organic · 20 pyramids · 40g · caffeine free</small>
-          <span>Clean, cooling peppermint from a cooperative in Egypt. Good hot or cold.</span>
-        </li>
-      </ul>
+      <details>
+        <summary>The blends</summary>
+        <ul class="tealist">
+          <li>
+            <b>Lemongrass &amp; Ginger</b>
+            <small>Organic · 20 pyramids · 50g · caffeine free</small>
+            <span>Bright lemongrass with a warm edge of ginger. Lovely hot, or chilled over ice with lemon.</span>
+          </li>
+          <li>
+            <b>Jasmine Green</b>
+            <small>Organic · 20 pyramids · 40g · green tea</small>
+            <span>Green tea infused with hand-picked jasmine flowers. Soft and floral, and steeps more than once.</span>
+          </li>
+          <li>
+            <b>Peppermint</b>
+            <small>Organic · 20 pyramids · 40g · caffeine free</small>
+            <span>Clean, cooling peppermint from a cooperative in Egypt. Good hot or cold.</span>
+          </li>
+        </ul>
+      </details>
 
       <p class="madeto"><b>Made in Melbourne.</b> Ships within 5 business days.</p>
 
