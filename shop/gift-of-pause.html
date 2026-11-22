@@ -77,6 +77,11 @@
   .teacard span{font-size:11px;color:var(--coffee);letter-spacing:.03em}
   .teacard p{font-size:12px;margin-top:6px}
 
+  .qty-wrap{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:18px;border:1px solid rgba(36,31,33,.18)}
+  .qty-btn{width:48px;height:48px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--char);transition:background .2s;font-family:var(--mono)}
+  .qty-btn:hover{background:var(--cream)}
+  .qty-num{width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:14px;letter-spacing:.06em;border-left:1px solid rgba(36,31,33,.18);border-right:1px solid rgba(36,31,33,.18)}
+
   .madeto{font-size:12px;line-height:1.7;color:var(--coffee);margin:-4px 0 18px;padding:12px 14px;background:var(--cream)}
   .madeto b{font-weight:400;color:var(--char);letter-spacing:.04em}
   .cta{display:block;width:100%;text-align:center;background:var(--char);color:var(--cream);text-decoration:none;padding:19px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;transition:background .25s;border:none;cursor:pointer;font-family:var(--mono)}
@@ -131,7 +136,7 @@
       <a href="/#world">The World</a>
       <a href="/#dining">Dining</a>
       <a href="/#rituals">Rituals</a>
-      <a href="/shop/catalogue.html">Shop</a>
+      <a href="/shop/">Shop</a>
       <a href="/wellness.html">Wellness</a>
       <a href="/#values">Values</a>
       <a href="/foundation.html">Giving Back</a>
@@ -155,6 +160,9 @@
         </button>
         <button aria-label="Candle lit, on travertine">
           <img src="assets/img/candle-lit-travertine.jpg" alt="Candle lit, on travertine" loading="lazy" style="width:100%;height:100%;object-fit:cover">
+        </button>
+        <button aria-label="Love Tea trio">
+          <img src="assets/img/love-tea-trio.jpg" alt="Love Tea Lemongrass and Ginger, Jasmine Green and Peppermint" loading="lazy" style="width:100%;height:100%;object-fit:cover">
         </button>
       </div>
       <div class="stage" id="stage">
@@ -222,6 +230,12 @@
       </div>
 
       <p class="madeto"><b>Poured in small batches.</b> Ships within 5 business days.</p>
+
+      <div class="qty-wrap">
+        <button class="qty-btn" id="qty-minus" aria-label="Decrease quantity">&minus;</button>
+        <span class="qty-num" id="qty-num">1</span>
+        <button class="qty-btn" id="qty-plus" aria-label="Increase quantity">+</button>
+      </div>
 
       <button class="cta" id="add-to-cart">Add to cart</button>
       <div class="assure">
@@ -295,7 +309,8 @@ const PRODUCT = { name: "Gift of Pause", price: 50, image: "/shop/assets/img/rit
 const IMAGES = [
   { src: "assets/img/ritual-box.jpg", alt: "Gift of Pause box" },
   { src: "assets/img/ritual-pour.jpg", alt: "Tea and candle" },
-  { src: "assets/img/candle-lit-travertine.jpg", alt: "Candle lit, on travertine" }
+  { src: "assets/img/candle-lit-travertine.jpg", alt: "Candle lit, on travertine" },
+  { src: "assets/img/love-tea-trio.jpg", alt: "Love Tea Lemongrass and Ginger, Jasmine Green and Peppermint" }
 ];
 
 const stage = document.getElementById("stage");
@@ -322,10 +337,15 @@ document.querySelectorAll('input[name="tea"]').forEach(radio => {
   });
 });
 
+/* ---------- QUANTITY ---------- */
+let qty = 1;
+document.getElementById('qty-minus').addEventListener('click', () => { if(qty > 1) { qty--; document.getElementById('qty-num').textContent = qty; } });
+document.getElementById('qty-plus').addEventListener('click', () => { qty++; document.getElementById('qty-num').textContent = qty; });
+
 /* ---------- ADD TO CART ---------- */
 document.getElementById("add-to-cart").addEventListener("click", function(e) {
   e.preventDefault();
-  ssAddToCart({ priceId: PRICE_ID, name: PRODUCT.name, price: PRODUCT.price, quantity: 1, image: PRODUCT.image });
+  ssAddToCart({ priceId: PRICE_ID, name: PRODUCT.name, price: PRODUCT.price, quantity: qty, image: PRODUCT.image });
 });
 
 /* Checkout overlay close */
