@@ -3,11 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Signature Candle — Rituals of Good Living | Still &amp; Social</title>
-<meta name="description" content="The Still & Social Signature Candle, poured into double-walled glass. A small ritual for slowing down, from Rituals of Good Living.">
+<title>The Collection — Rituals of Good Living | Still &amp; Social</title>
+<meta name="description" content="A considered collection of objects made to bring the calm of the sanctuary into everyday life. Candles, tea and ritual gifts from Still & Social.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Headline: Moulin Light per the brand guide. Cormorant Garamond is a web stand-in until Moulin web fonts are self-hosted. -->
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Google+Sans+Code:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -24,7 +23,6 @@
   a{color:inherit}
   .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--coffee)}
   .serif{font-family:var(--serif);font-weight:300;letter-spacing:.02em}
-  .tbc{background:linear-gradient(transparent 60%,rgba(159,81,54,.18) 0);padding:0 2px}
 
   /* Nav */
   body{padding-top:120px}
@@ -45,120 +43,27 @@
   .menu-toggle{display:none;background:none;border:0;color:var(--char);padding:8px}
   @media(max-width:980px){.nav-links{display:none}.menu-toggle{display:block}.nav.open .nav-links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:22px;padding:36px var(--gutter) 40px;background:var(--cream);border-top:1px solid rgba(43,38,32,.12)}}
 
-  /* Product hero */
-  .product{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,6vw,96px);padding:clamp(32px,5vw,72px) var(--gutter) clamp(64px,8vw,120px);max-width:1440px;margin:0 auto}
-  @media(max-width:900px){.product{grid-template-columns:minmax(0,1fr)}}
-  .product>*,.gallery>*{min-width:0}
-  .gallery{display:grid;grid-template-columns:72px 1fr;gap:16px;align-self:start;position:sticky;top:140px}
-  @media(max-width:900px){.gallery{position:static;grid-template-columns:minmax(0,1fr)}.thumbs{order:2;flex-direction:row!important;overflow-x:auto;scrollbar-width:none}.thumbs button{flex:0 0 64px;width:64px}}
-  .thumbs{display:flex;flex-direction:column;gap:10px;max-height:100%;overflow-y:auto;scrollbar-width:none}
-  .thumbs button{border:1px solid transparent;background:none;padding:0;cursor:pointer;aspect-ratio:4/5;width:72px;flex:0 0 auto;overflow:hidden}
-  .thumbs button[aria-current="true"]{border-color:var(--char)}
-  .stage{aspect-ratio:4/5;background:var(--cream);overflow:hidden;position:relative}
-  .stage img{width:100%;height:100%;object-fit:cover}
-  .shot{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:24px;background:var(--cream);color:var(--coffee)}
-  .shot b{font-family:var(--serif);font-weight:300;font-size:22px;color:var(--char)}
-  .shot span{font-size:11px;letter-spacing:.06em;max-width:34ch}
-  .thumbs .shot b{font-size:11px}.thumbs .shot span{display:none}
+  /* Hero title */
+  .hero{text-align:center;padding:clamp(72px,10vw,140px) var(--gutter) clamp(48px,6vw,80px);max-width:720px;margin:0 auto}
+  .hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(44px,5vw,68px);line-height:1.02;margin:20px 0 18px;letter-spacing:.01em}
+  .hero p{font-family:var(--serif);font-size:19px;line-height:1.5;color:var(--coffee);max-width:40ch;margin:0 auto}
 
-  .buy{padding-top:12px}
-  .buy h1{font-family:var(--serif);font-weight:300;font-size:clamp(40px,4.4vw,60px);line-height:1.02;margin:18px 0 14px;letter-spacing:.01em}
-  .price{font-size:15px;letter-spacing:.08em}
-  .lede{font-family:var(--serif);font-size:21px;line-height:1.45;margin:28px 0 30px;max-width:30ch}
-  .notes{display:flex;gap:0;border-top:1px solid rgba(36,31,33,.12);border-bottom:1px solid rgba(36,31,33,.12);margin-bottom:30px}
-  .notes div{flex:1;padding:16px 0;text-align:center}
-  .notes div+div{border-left:1px solid rgba(36,31,33,.12)}
-  .notes small{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--coffee);margin-bottom:4px}
-  fieldset{border:0;margin-bottom:26px}
-  legend{margin-bottom:12px}
-  .opt{display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(36,31,33,.18);padding:16px 18px;margin-bottom:10px;cursor:pointer;transition:border-color .2s}
-  .opt:has(input:checked){border-color:var(--char);background:var(--cream)}
-  .opt input{position:absolute;opacity:0}
-  .opt strong{font-weight:400;display:block;font-size:13px;letter-spacing:.04em}
-  .opt em{font-style:normal;font-size:12px;color:var(--coffee)}
-  .teanote{display:none;margin:-12px 0 24px;font-size:12px;color:var(--coffee)}
-  .teanote.show{display:block}
-  .teas{display:none;margin:-10px 0 26px}
-  .teas.show{display:block}
-  .pills{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-  .pill{border:1px solid rgba(36,31,33,.18);padding:12px 8px;text-align:center;font-size:12px;letter-spacing:.03em;cursor:pointer;line-height:1.4}
-  .pill:has(input:checked){border-color:var(--char);background:var(--cream)}
-  .pill input{position:absolute;opacity:0}
-  .pill small{display:block;font-size:10px;color:var(--coffee);letter-spacing:.04em;margin-top:2px}
-  .teacard{display:grid;grid-template-columns:84px 1fr;gap:16px;align-items:center;margin-top:12px;padding:12px;background:var(--cream)}
-  .teacard img{width:84px;mix-blend-mode:multiply}
-  .teacard b{font-family:var(--serif);font-weight:300;font-size:19px;display:block}
-  .teacard span{font-size:11px;color:var(--coffee);letter-spacing:.03em}
-  .teacard p{font-size:12px;margin-top:6px}
-  .madeto{font-size:12px;line-height:1.7;color:var(--coffee);margin:-4px 0 18px;padding:12px 14px;background:var(--cream)}
-  .madeto b{font-weight:400;color:var(--char);letter-spacing:.04em}
-  .cta{display:block;width:100%;text-align:center;background:var(--char);color:var(--cream);text-decoration:none;padding:19px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;transition:background .25s;border:none;cursor:pointer;font-family:var(--mono)}
-  .cta:hover{background:var(--coffee)}
-  .assure{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:center;margin-top:16px;font-size:11px;color:var(--coffee);letter-spacing:.04em}
+  /* Product grid */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,3vw,36px);padding:0 var(--gutter) clamp(80px,10vw,160px);max-width:1200px;margin:0 auto}
+  @media(max-width:700px){.grid{grid-template-columns:1fr}}
 
-  details{border-bottom:1px solid rgba(36,31,33,.12)}
-  details:first-of-type{border-top:1px solid rgba(36,31,33,.12);margin-top:40px}
-  summary{list-style:none;cursor:pointer;padding:18px 0;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.22em;text-transform:uppercase}
-  summary::after{content:"+";font-size:16px;line-height:1}
-  details[open] summary::after{content:"–"}
-  details p,details ul{padding:0 0 20px;font-size:13px;max-width:52ch}
-  details ul{list-style:none}
-  details li{padding-left:16px;position:relative}
-  details li::before{content:"·";position:absolute;left:2px}
-
-  /* Story */
-  .story{display:grid;grid-template-columns:1fr 1fr;min-height:82vh;background:var(--char);color:var(--cream)}
-  @media(max-width:900px){.story{grid-template-columns:1fr}}
-  .story .img{background:var(--coffee)}
-  .story .img .shot{background:#3a3134;color:var(--oat)}.story .img .shot b{color:var(--cream)}
-  .story .txt{display:flex;flex-direction:column;justify-content:center;padding:clamp(48px,8vw,120px)}
-  .story .eyebrow{color:var(--oat)}
-  .story blockquote{font-family:var(--serif);font-weight:300;font-size:clamp(30px,3.4vw,48px);line-height:1.2;margin:28px 0 32px;max-width:16ch}
-  .story p{max-width:42ch;color:rgba(245,241,221,.78)}
-
-  /* Ritual steps */
-  section.wrap{padding:clamp(80px,10vw,160px) var(--gutter);max-width:1440px;margin:0 auto}
-  .center{text-align:center}
-  h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,3.6vw,50px);line-height:1.1;margin:18px 0 0}
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,64px);margin-top:clamp(48px,6vw,88px)}
-  @media(max-width:800px){.steps{grid-template-columns:1fr}}
-  .step .frame{aspect-ratio:4/5;margin-bottom:26px}
-  .step h3{font-family:var(--serif);font-weight:300;font-size:26px;margin:8px 0 10px}
-  .step p{font-size:13px;max-width:36ch}
-
-  /* Box */
-  .box{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,6vw,96px);align-items:center;background:var(--cream);padding:clamp(72px,9vw,140px) var(--gutter)}
-  @media(max-width:900px){.box{grid-template-columns:1fr}}
-  .box img{box-shadow:0 30px 60px -30px rgba(36,31,33,.35)}
-  .box p{max-width:40ch;margin-top:22px}
-  .box ul{list-style:none;margin-top:28px;border-top:1px solid rgba(36,31,33,.12)}
-  .box li{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(36,31,33,.12);font-size:13px}
-
-  /* Teas */
-  .teasec{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,96px);align-items:center;padding:clamp(72px,9vw,140px) var(--gutter);max-width:1440px;margin:0 auto}
-  @media(max-width:900px){.teasec{grid-template-columns:1fr}}
-  .teasec .trio{aspect-ratio:5/4;overflow:hidden;background:var(--cream)}
-  .teasec .trio img{width:100%;height:100%;object-fit:cover}
-  .teasec p.intro{max-width:40ch;margin-top:22px}
-  .tealist{list-style:none;margin-top:32px;border-top:1px solid rgba(36,31,33,.12)}
-  .tealist li{padding:18px 0;border-bottom:1px solid rgba(36,31,33,.12)}
-  .tealist b{font-family:var(--serif);font-weight:300;font-size:22px;display:block}
-  .tealist small{font-size:11px;color:var(--coffee);letter-spacing:.04em}
-  .tealist span{display:block;font-size:13px;margin-top:4px;max-width:44ch}
-
-  .teabuy{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-  .teabuy a{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--char);padding:15px 16px;text-decoration:none;font-size:12px;letter-spacing:.06em;transition:background .2s;cursor:pointer}
-  .teabuy a:hover{background:var(--cream)}
-  .teabuy em{font-style:normal}
-  @media(max-width:600px){.teabuy{grid-template-columns:1fr}}
-
-  /* Pair */
-  .pair{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px}
-  @media(max-width:700px){.pair{grid-template-columns:1fr}}
-  .card{background:var(--cream);padding:0 0 28px}
-  .card .frame{aspect-ratio:1}
-  .card div.meta{padding:22px 24px 0;display:flex;justify-content:space-between;align-items:baseline}
-  .card h4{font-family:var(--serif);font-weight:300;font-size:24px}
+  .card{background:var(--cream);display:flex;flex-direction:column;transition:transform .3s ease,box-shadow .3s ease}
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 48px -12px rgba(36,31,33,.15)}
+  .card .img{aspect-ratio:1/1;overflow:hidden;background:var(--paper);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  .card .img img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .4s ease}
+  .card:hover .img img{transform:scale(1.03)}
+  .card a{display:flex;flex-direction:column;flex:1}
+  .card .info{padding:22px 24px 0;flex:1;display:flex;flex-direction:column}
+  .card .info .row{display:flex;justify-content:space-between;align-items:baseline}
+  .card h3{font-family:var(--serif);font-weight:300;font-size:24px;line-height:1.15}
+  .card .price{font-size:14px;letter-spacing:.08em;color:var(--coffee);flex-shrink:0}
+  .card .desc{font-size:12px;color:var(--coffee);margin-top:6px;letter-spacing:.02em;flex:1}
+  .card .info{padding:22px 24px 24px}
 
   footer{border-top:1px solid rgba(36,31,33,.1);padding:56px var(--gutter);display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--coffee)}
   .reveal{opacity:0;transform:translateY(16px);transition:opacity 1s ease,transform 1s ease}
@@ -187,7 +92,7 @@
       <a href="/#world">The World</a>
       <a href="/#dining">Dining</a>
       <a href="/#rituals">Rituals</a>
-      <a href="/shop/catalogue.html">Shop</a>
+
       <a href="/wellness.html">Wellness</a>
       <a href="/#values">Values</a>
       <a href="/foundation.html">Giving Back</a>
@@ -199,175 +104,53 @@
 </nav>
 
 <main>
-  <!-- ============ PRODUCT ============ -->
-  <section class="product" id="buy">
-    <div class="gallery">
-      <div class="thumbs" role="tablist" aria-label="Product images"></div>
-      <div class="stage" id="stage"></div>
-    </div>
-
-    <div class="buy">
-      <p class="eyebrow">Rituals of Good Living</p>
-      <h1>Signature<br>Candle</h1>
-      <p class="price" id="price">$50 AUD</p>
-
-      <p class="lede">A small ritual for slowing down. Poured into double-walled glass, made to be lit at the end of the day and the beginning of a pause.</p>
-
-      <div class="notes" aria-label="Scent notes">
-        <div><small>Top</small><span class="tbc">Note</span></div>
-        <div><small>Heart</small><span class="tbc">Note</span></div>
-        <div><small>Base</small><span class="tbc">Note</span></div>
-      </div>
-
-      <fieldset>
-        <legend class="eyebrow">Choose your ritual</legend>
-        <label class="opt">
-          <input type="radio" name="variant" value="candle" checked>
-          <span><strong>Signature Candle</strong><em>Signature candle, boxed</em></span>
-          <em>$50</em>
-        </label>
-        <label class="opt">
-          <input type="radio" name="variant" value="ritual">
-          <span><strong>Gift of Pause</strong><em>Signature candle &amp; your choice of Love Tea, boxed</em></span>
-          <em>$50</em>
-        </label>
-      </fieldset>
-
-      <p class="teanote" id="teanote">You'll choose your tea at checkout: Lemongrass &amp; Ginger, Jasmine Green or Peppermint.</p>
-
-      <p class="madeto"><b>Poured in small batches.</b> Ships within 5 business days.</p>
-
-      <button class="cta" id="add-to-cart">Add to cart</button>
-      <div class="assure">
-        <span>Secure checkout with Stripe</span><span>·</span>
-        <span>Hand poured</span><span>·</span>
-        <span>Free shipping over $100</span>
-      </div>
-
-      <details open>
-        <summary>The scent</summary>
-        <p><span class="tbc">Two or three sentences on the fragrance: where it takes you, what it smells like as it burns, and when to light it.</span></p>
-      </details>
-      <details>
-        <summary>Poured in small batches</summary>
-        <ul>
-          <li>We pour by hand in small weekly batches and let every candle cure for <span class="tbc">X</span> days, so the scent comes through fully.</li>
-          <li>Your order ships within 5 business days, with tracking once it's on its way.</li>
-          <li>Ordering for Christmas? Order by <span class="tbc">date</span> for delivery before 25 December.</li>
-        </ul>
-      </details>
-      <details>
-        <summary>The vessel</summary>
-        <p>Double-walled clear glass, so the wax seems to float, held still in the light. Once the last of the candle has burned, warm the glass, clean it out, and keep it for something new.</p>
-      </details>
-      <details>
-        <summary>Details</summary>
-        <ul>
-          <li>Wax: coconut soy blend</li>
-          <li>Net weight: <span class="tbc">XXXg</span></li>
-          <li>Burn time: approx. <span class="tbc">XX hours</span></li>
-          <li>Hand poured in <span class="tbc">Australia</span></li>
-        </ul>
-      </details>
-      <details>
-        <summary>Candle care</summary>
-        <ul>
-          <li>Trim the wick to 5mm before each burn.</li>
-          <li>On the first light, let the wax melt to the edge of the glass.</li>
-          <li>Burn for no more than <span class="tbc">3</span> hours at a time.</li>
-          <li>Never leave a burning candle unattended.</li>
-        </ul>
-      </details>
-      <details>
-        <summary>Shipping &amp; returns</summary>
-        <p><span class="tbc">Your shipping zones, delivery times and returns policy.</span></p>
-      </details>
-    </div>
+  <section class="hero reveal">
+    <p class="eyebrow">Rituals of Good Living</p>
+    <h1>The Collection</h1>
+    <p>A considered collection of objects made to bring the calm of the sanctuary into everyday life.</p>
   </section>
 
-  <!-- ============ STORY ============ -->
-  <section class="story">
-    <div class="img" data-shot="dunes"></div>
-    <div class="txt reveal">
-      <p class="eyebrow">The pause</p>
-      <blockquote>There it is. That pause.</blockquote>
-      <p>That half-second between silence and sensation, when the world exhales and something deeper enters. Still &amp; Social was born from that moment. This candle is a way to bring it home.</p>
-    </div>
-  </section>
-
-  <!-- ============ RITUAL ============ -->
-  <section class="wrap center">
-    <p class="eyebrow reveal">A ritual in three parts</p>
-    <h2 class="reveal">Come sit. Come slow down.</h2>
-    <div class="steps" style="text-align:left">
-      <div class="step reveal">
-        <div class="frame" data-shot="light"></div>
-        <p class="eyebrow">01</p><h3>Light</h3>
-        <p>Strike a match at the end of the day. Let the first flame mark the line between doing and being.</p>
+  <div class="grid">
+    <a class="card reveal" href="/shop/signature-candle.html" style="text-decoration:none;color:inherit">
+      <div class="img">
+        <img src="assets/img/candle-lit-travertine.jpg" alt="Signature Candle — double-walled glass vessel in coastal grasses" loading="lazy">
       </div>
-      <div class="step reveal">
-        <div class="frame" data-shot="pour"></div>
-        <p class="eyebrow">02</p><h3>Pour</h3>
-        <p>Brew a cup, put the phone face down and stay with the warmth in your hands.</p>
+      <div class="info">
+        <div class="row"><h3>Signature Candle</h3><span class="price">$65</span></div>
+        <p class="desc">A small ritual for slowing down, poured into double-walled glass.</p>
       </div>
-      <div class="step reveal">
-        <div class="frame" data-shot="pause"></div>
-        <p class="eyebrow">03</p><h3>Pause</h3>
-        <p>No performance, just presence. Come as you are, and leave a little more whole.</p>
+    </a>
+
+    <a class="card reveal" href="/shop/gift-of-pause.html" style="text-decoration:none;color:inherit">
+      <div class="img">
+        <img src="assets/img/ritual-box.jpg" alt="Gift of Pause — candle and tea boxed together" loading="lazy">
       </div>
-    </div>
-  </section>
-
-  <!-- ============ BOX ============ -->
-  <section class="box">
-    <img class="reveal" src="assets/img/ritual-box.jpg" alt="Gift of Pause box by Still & Social, cream with the stone mark, in afternoon light">
-    <div class="reveal">
-      <p class="eyebrow">Gift of Pause</p>
-      <h2>Bring the feeling of Still &amp; Social home.</h2>
-      <p>Our signature candle and a box of organic Love Tea, made in Melbourne, in your choice of Lemongrass &amp; Ginger, Jasmine Green or Peppermint. Light the candle, brew a cup, and let the day soften around you. For yourself, or for someone who needs the pause.</p>
-      <ul>
-        <li><span>Signature Candle</span><span class="tbc">XXXg</span></li>
-        <li><span>Love Tea, organic, your choice of three</span><span>20 pyramids</span></li>
-        <li><span>The box</span><span>Keep it, reuse it</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============ TEAS ============ -->
-  <section class="teasec">
-    <div class="trio reveal"><img src="assets/img/love-tea-trio.jpg" alt="Love Tea Lemongrass and Ginger, Jasmine Green and Peppermint boxes side by side" loading="lazy"></div>
-    <div class="reveal">
-      <p class="eyebrow">The teas</p>
-      <h2>Three teas, chosen for the pause.</h2>
-      <p class="intro">Organic Love Tea, made in Melbourne. Choose one for your Gift of Pause, or take them home on their own.</p>
-      <ul class="tealist">
-        <li><b>Lemongrass &amp; Ginger</b><small>Organic · 20 pyramids · 50g · caffeine free</small><span>Bright lemongrass with a warm edge of ginger. Lovely hot, or chilled over ice with lemon.</span></li>
-        <li><b>Jasmine Green</b><small>Organic · 20 pyramids · 40g · green tea</small><span>Green tea infused with hand-picked jasmine flowers. Soft and floral, and steeps more than once.</span></li>
-        <li><b>Peppermint</b><small>Organic · 20 pyramids · 40g · caffeine free</small><span>Clean, cooling peppermint from a cooperative in Egypt. Good hot or cold.</span></li>
-      </ul>
-      <a class="cta" href="#buy" data-pick="ritual" style="margin-top:32px;display:block;text-decoration:none">Choose your Gift of Pause</a>
-      <div class="teabuy">
-        <a data-buy="tea" href="#"><span>Love Tea, Single</span><em>$50</em></a>
-        <a data-buy="teaTrio" href="#"><span>3 Tea Gift Pack</span><em>$50</em></a>
+      <div class="info">
+        <div class="row"><h3>Gift of Pause</h3><span class="price">$79</span></div>
+        <p class="desc">Signature candle and your choice of Love Tea, boxed.</p>
       </div>
-    </div>
-  </section>
+    </a>
 
-  <!-- ============ PAIRS WITH ============ -->
-  <section class="wrap">
-    <p class="eyebrow">From the Rituals collection</p>
-    <h2>Made to sit together.</h2>
-    <div class="pair">
-      <a class="card reveal" href="#buy" style="text-decoration:none" data-pick="ritual">
-        <div class="frame" data-shot="boxset"></div>
-        <div class="meta"><h4>Gift of Pause</h4><span>$50</span></div>
-      </a>
-      <a class="card reveal" href="/rituals" style="text-decoration:none">
-        <div class="frame soon" data-shot="next"></div>
-        <div class="meta"><h4>More rituals, soon</h4><span class="eyebrow">Skincare · Home</span></div>
-      </a>
-    </div>
-  </section>
+    <a class="card reveal" href="/shop/love-tea.html" style="text-decoration:none;color:inherit">
+      <div class="img">
+        <img src="assets/img/love-tea-single.jpg" alt="Love Tea, Single — Lemongrass and Ginger" loading="lazy">
+      </div>
+      <div class="info">
+        <div class="row"><h3>Love Tea, Single</h3><span class="price">$17</span></div>
+        <p class="desc">Organic Love Tea, made in Melbourne. Your choice of three blends.</p>
+      </div>
+    </a>
+
+    <a class="card reveal" href="/shop/tea-gift-pack.html" style="text-decoration:none;color:inherit">
+      <div class="img">
+        <img src="assets/img/love-tea-trio.jpg" alt="3 Tea Gift Pack — all three blends" loading="lazy">
+      </div>
+      <div class="info">
+        <div class="row"><h3>3 Tea Gift Pack</h3><span class="price">$49</span></div>
+        <p class="desc">All three blends, boxed together. The full pause.</p>
+      </div>
+    </a>
+  </div>
 </main>
 
 <footer>
@@ -391,92 +174,6 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script src="assets/cart.js"></script>
 <script>
-/* ---------- PRODUCT DATA ---------- */
-const PRICES = {
-  candle:   "price_1UeWtLRdn5OIpN4blpBUk2sR",
-  ritual:   "price_1UeWtORdn5OIpN4b1MqEN7AN",
-  tea:      "price_1UeWtQRdn5OIpN4bI2fTi7z6",
-  teaTrio:  "price_1UeWtTRdn5OIpN4bkubgNKVW"
-};
-const PRODUCTS = {
-  candle:  { name: "Signature Candle", price: 50, image: "/shop/assets/img/candle-dunes.jpg" },
-  ritual:  { name: "Gift of Pause", price: 50, image: "/shop/assets/img/ritual-box.jpg" },
-  tea:     { name: "Love Tea, Single", price: 50, image: "/shop/assets/img/love-tea-trio.jpg" },
-  teaTrio: { name: "3 Tea Gift Pack", price: 50, image: "/shop/assets/img/love-tea-trio.jpg" }
-};
-
-/* ---------- IMAGES ---------- */
-const SHOTS = {
-  lit:    { src: "assets/img/candle-lit-travertine.jpg",    title: "Lit, on travertine" },
-  top:    { src: "assets/img/candle-top.jpg",    title: "From above" },
-  teas:   { src: "assets/img/love-tea-trio.jpg", title: "The teas" },
-  boxset: { src: "assets/img/ritual-box.jpg", title: "Gift of Pause" },
-  dunes:  { src: "assets/img/candle-dunes.jpg",     title: "In the grasses" },
-  light:  { src: "assets/img/candle-lit-stone.jpg",   title: "Lit, on stone" },
-  pour:   { src: "assets/img/ritual-pour.jpg",   title: "Tea and candle" },
-  pause:  { src: "assets/img/ritual-pause.jpg",  title: "At dusk" },
-  next:   { src: null, title: "More rituals, soon", note: "" }
-};
-const GALLERY = ["dunes", "lit", "top"];
-
-function render(el, key, alt){
-  const s = SHOTS[key];
-  el.innerHTML = s.src
-    ? `<img src="${s.src}" alt="${alt || s.title}" loading="lazy" style="width:100%;height:100%;object-fit:cover">`
-    : `<div class="shot"><b>${s.title}</b>${s.note ? `<span>${s.note}</span>` : ""}</div>`;
-}
-
-const stage = document.getElementById("stage");
-const thumbs = document.querySelector(".thumbs");
-GALLERY.forEach((k, i) => {
-  const b = document.createElement("button");
-  b.setAttribute("aria-label", SHOTS[k].title);
-  b.setAttribute("aria-current", i === 0);
-  render(b, k);
-  b.onclick = () => {
-    render(stage, k, "Still & Social Signature Candle — " + SHOTS[k].title);
-    thumbs.querySelectorAll("button").forEach(x => x.setAttribute("aria-current", x === b));
-  };
-  thumbs.appendChild(b);
-});
-render(stage, "dunes", "Still & Social Signature Candle in double-walled glass, resting in coastal grasses");
-document.querySelectorAll("[data-shot]").forEach(el => render(el, el.dataset.shot));
-
-/* Variant selection */
-function getSelectedVariant() {
-  return document.querySelector('input[name="variant"]:checked').value;
-}
-
-function update(){
-  const v = getSelectedVariant();
-  document.getElementById("teanote").classList.toggle("show", v === "ritual");
-}
-function setVariant(v){
-  document.querySelector(`input[name="variant"][value="${v}"]`).checked = true;
-  update();
-}
-document.querySelectorAll('input[name="variant"]').forEach(r => r.onchange = update);
-setVariant("candle");
-
-/* Main "Add to cart" button */
-document.getElementById("add-to-cart").addEventListener("click", function(e) {
-  e.preventDefault();
-  const v = getSelectedVariant();
-  ssAddToCart({ priceId: PRICES[v], name: PRODUCTS[v].name, price: PRODUCTS[v].price, quantity: 1, image: PRODUCTS[v].image });
-});
-
-/* Tea buy buttons — add to cart */
-document.querySelectorAll("[data-buy]").forEach(a => {
-  a.addEventListener("click", function(e) {
-    e.preventDefault();
-    const k = this.dataset.buy;
-    ssAddToCart({ priceId: PRICES[k], name: PRODUCTS[k].name, price: PRODUCTS[k].price, quantity: 1, image: PRODUCTS[k].image });
-  });
-});
-
-/* "Choose your Gift of Pause" links */
-document.querySelectorAll("[data-pick]").forEach(a => a.addEventListener("click", () => setVariant(a.dataset.pick)));
-
 /* Checkout overlay close */
 document.getElementById("checkout-close").addEventListener("click", function(){ ssCloseCheckout(); });
 document.getElementById("checkout-overlay").addEventListener("click", function(e){ if(e.target === this) ssCloseCheckout(); });
@@ -489,7 +186,7 @@ onNavScroll();
 document.getElementById('menuToggle').addEventListener('click', () => navEl.classList.toggle('open'));
 document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navEl.classList.remove('open')));
 
-/* Gentle reveal on scroll */
+/* ---------- REVEAL ---------- */
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .15 });
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 </script>

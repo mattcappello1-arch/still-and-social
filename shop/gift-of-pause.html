@@ -64,6 +64,15 @@
   .inbox{list-style:none;margin:0 0 30px;border-top:1px solid rgba(36,31,33,.12)}
   .inbox li{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(36,31,33,.12);font-size:13px}
 
+  /* Variant options */
+  fieldset{border:0;margin-bottom:30px}
+  legend{margin-bottom:12px}
+  .opt{display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(36,31,33,.18);padding:18px 20px;margin-bottom:12px;cursor:pointer;transition:border-color .2s}
+  .opt:has(input:checked){border-color:var(--char);background:var(--cream)}
+  .opt input{position:absolute;opacity:0}
+  .opt strong{font-weight:400;display:block;font-size:13px;letter-spacing:.04em}
+  .opt em{font-style:normal;font-size:12px;color:var(--coffee)}
+
   /* Tea picker */
   .teas{margin-bottom:26px}
   .pills{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
@@ -136,7 +145,7 @@
       <a href="/#world">The World</a>
       <a href="/#dining">Dining</a>
       <a href="/#rituals">Rituals</a>
-      <a href="/shop/">Shop</a>
+
       <a href="/wellness.html">Wellness</a>
       <a href="/#values">Values</a>
       <a href="/foundation.html">Giving Back</a>
@@ -155,9 +164,6 @@
         <button aria-label="Gift of Pause box" aria-current="true">
           <img src="assets/img/ritual-box.jpg" alt="Gift of Pause box" loading="lazy" style="width:100%;height:100%;object-fit:cover">
         </button>
-        <button aria-label="Tea and candle">
-          <img src="assets/img/ritual-pour.jpg" alt="Tea and candle" loading="lazy" style="width:100%;height:100%;object-fit:cover">
-        </button>
         <button aria-label="Candle lit, on travertine">
           <img src="assets/img/candle-lit-travertine.jpg" alt="Candle lit, on travertine" loading="lazy" style="width:100%;height:100%;object-fit:cover">
         </button>
@@ -173,61 +179,28 @@
     <div class="buy">
       <p class="eyebrow">Rituals of Good Living</p>
       <h1>Gift of<br>Pause</h1>
-      <p class="price">$50 AUD</p>
+      <p class="price">$79 AUD</p>
 
-      <p class="lede">Our signature candle and a box of organic Love Tea, made in Melbourne, in your choice of Lemongrass &amp; Ginger, Jasmine Green or Peppermint. Light the candle, brew a cup, and let the day soften around you. For yourself, or for someone who needs the pause.</p>
+      <p class="lede">Our signature candle and a box of organic Love Tea. Light the candle, brew a cup, and let the day soften around you.</p>
 
-      <p class="eyebrow">What's in the box</p>
-      <ul class="inbox">
-        <li><span>Signature Candle</span><span>Double-walled glass, boxed</span></li>
-        <li><span>Love Tea, organic, your choice of three</span><span>20 pyramids</span></li>
-        <li><span>The box</span><span>Keep it, reuse it</span></li>
-      </ul>
-
-      <div class="teas">
-        <p class="eyebrow">Choose your tea</p>
-        <div class="pills">
-          <label class="pill">
-            <input type="radio" name="tea" value="lemongrass" checked>
-            Lemongrass &amp; Ginger
-            <small>Caffeine free</small>
-          </label>
-          <label class="pill">
-            <input type="radio" name="tea" value="jasmine">
-            Jasmine Green
-            <small>Green tea</small>
-          </label>
-          <label class="pill">
-            <input type="radio" name="tea" value="peppermint">
-            Peppermint
-            <small>Caffeine free</small>
-          </label>
-        </div>
-        <div class="teacard" id="teacard-lemongrass">
-          <img src="assets/img/tea-lemongrass-ginger.jpg" alt="Lemongrass & Ginger">
-          <div>
-            <b>Lemongrass &amp; Ginger</b>
-            <span>Organic · 20 pyramids · 50g · caffeine free</span>
-            <p>Bright lemongrass with a warm edge of ginger. Lovely hot, or chilled over ice with lemon.</p>
-          </div>
-        </div>
-        <div class="teacard" id="teacard-jasmine" style="display:none">
-          <img src="assets/img/tea-jasmine-green.jpg" alt="Jasmine Green">
-          <div>
-            <b>Jasmine Green</b>
-            <span>Organic · 20 pyramids · 40g · green tea</span>
-            <p>Green tea infused with hand-picked jasmine flowers. Soft and floral, and steeps more than once.</p>
-          </div>
-        </div>
-        <div class="teacard" id="teacard-peppermint" style="display:none">
-          <img src="assets/img/tea-peppermint.jpg" alt="Peppermint">
-          <div>
-            <b>Peppermint</b>
-            <span>Organic · 20 pyramids · 40g · caffeine free</span>
-            <p>Clean, cooling peppermint from a cooperative in Egypt. Good hot or cold.</p>
-          </div>
-        </div>
-      </div>
+      <fieldset>
+        <legend class="eyebrow">Choose your blend</legend>
+        <label class="opt">
+          <input type="radio" name="tea" value="lemongrass" checked>
+          <strong>Lemongrass &amp; Ginger</strong>
+          <em>Caffeine free</em>
+        </label>
+        <label class="opt">
+          <input type="radio" name="tea" value="jasmine">
+          <strong>Jasmine Green</strong>
+          <em>Green tea</em>
+        </label>
+        <label class="opt">
+          <input type="radio" name="tea" value="peppermint">
+          <strong>Peppermint</strong>
+          <em>Caffeine free</em>
+        </label>
+      </fieldset>
 
       <p class="madeto"><b>Poured in small batches.</b> Ships within 5 business days.</p>
 
@@ -240,21 +213,35 @@
       <button class="cta" id="add-to-cart">Add to cart</button>
       <div class="assure">
         <span>Secure checkout with Stripe</span><span>·</span>
-        <span>Hand poured</span><span>·</span>
-        <span>Free shipping over $100</span>
-      </div>
+        <span>Hand poured</span>      </div>
 
-      <details open>
+      <details>
         <summary>What's inside</summary>
         <ul>
-          <li>Signature Candle — coconut soy blend, double-walled glass vessel, boxed</li>
-          <li>Love Tea — organic, Melbourne-made, 20 biodegradable pyramids in your choice of Lemongrass &amp; Ginger, Jasmine Green or Peppermint</li>
-          <li>The box — cream with the stone mark, designed to keep and reuse</li>
+          <li>Signature Candle — coconut soy blend, double-walled glass</li>
+          <li>Love Tea — organic, 20 biodegradable pyramids, your choice of blend</li>
+          <li>The box — cream with the stone mark, keep and reuse</li>
+        </ul>
+      </details>
+      <details>
+        <summary>The blends</summary>
+        <ul>
+          <li>Lemongrass &amp; Ginger — bright lemongrass with a warm edge of ginger. Caffeine free, 50g.</li>
+          <li>Jasmine Green — green tea infused with hand-picked jasmine flowers. Soft and floral, 40g.</li>
+          <li>Peppermint — clean, cooling peppermint from a cooperative in Egypt. Caffeine free, 40g.</li>
+        </ul>
+      </details>
+      <details>
+        <summary>The candle</summary>
+        <ul>
+          <li>Wax: coconut soy blend</li>
+          <li>Vessel: double-walled clear glass</li>
+          <li>Hand poured in small batches</li>
         </ul>
       </details>
       <details>
         <summary>Shipping &amp; returns</summary>
-        <p>Orders ship within 5 business days. We ship Australia-wide with tracking. Free shipping on orders over $100. For returns or questions, email info@stillandsocial.com.</p>
+        <p>Orders ship within 5 business days. We ship Australia-wide with tracking. For returns or questions, email info@stillandsocial.com.</p>
       </details>
     </div>
   </section>
@@ -266,15 +253,15 @@
     <div class="pair">
       <a class="card reveal" href="/shop/" style="text-decoration:none">
         <div class="frame">
-          <img src="assets/img/candle-dunes.jpg" alt="Signature Candle" loading="lazy" style="width:100%;height:100%;object-fit:cover">
+          <img src="assets/img/candle-lit-travertine.jpg" alt="Signature Candle" loading="lazy" style="width:100%;height:100%;object-fit:cover">
         </div>
-        <div class="meta"><h4>Signature Candle</h4><span>$50</span></div>
+        <div class="meta"><h4>Signature Candle</h4><span>$65</span></div>
       </a>
       <a class="card reveal" href="/shop/love-tea.html" style="text-decoration:none">
         <div class="frame">
           <img src="assets/img/love-tea-trio.jpg" alt="Love Tea" loading="lazy" style="width:100%;height:100%;object-fit:cover">
         </div>
-        <div class="meta"><h4>Love Tea</h4><span>$50</span></div>
+        <div class="meta"><h4>Love Tea</h4><span>$17</span></div>
       </a>
     </div>
   </section>
@@ -302,13 +289,12 @@
 <script src="assets/cart.js"></script>
 <script>
 /* ---------- PRODUCT DATA ---------- */
-const PRICE_ID = "price_1UeWtORdn5OIpN4b1MqEN7AN";
-const PRODUCT = { name: "Gift of Pause", price: 50, image: "/shop/assets/img/ritual-box.jpg" };
+const PRICE_ID = "price_1Uel4aRdn5OIpN4bmRFR8RWH";
+const PRODUCT = { name: "Gift of Pause", price: 79, image: "/shop/assets/img/ritual-box.jpg" };
 
 /* ---------- GALLERY ---------- */
 const IMAGES = [
   { src: "assets/img/ritual-box.jpg", alt: "Gift of Pause box" },
-  { src: "assets/img/ritual-pour.jpg", alt: "Tea and candle" },
   { src: "assets/img/candle-lit-travertine.jpg", alt: "Candle lit, on travertine" },
   { src: "assets/img/love-tea-trio.jpg", alt: "Love Tea Lemongrass and Ginger, Jasmine Green and Peppermint" }
 ];
