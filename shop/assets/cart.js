@@ -12,13 +12,24 @@
   window.ssClearCart = function(){ localStorage.removeItem(CART_KEY); updateBadge(); renderCartDrawer(); };
 
   /* ---- Cart operations ---- */
+  function cartKey(item){
+    return item.name + (item.modifier_name ? " — " + item.modifier_name : "");
+  }
+
   function addToCart(item){
     const cart = getCart();
-    const idx = cart.findIndex(c => c.name === item.name);
+    const key = cartKey(item);
+    const idx = cart.findIndex(c => cartKey(c) === key);
     if(idx > -1){ cart[idx].quantity += (item.quantity || 1); }
-    else { cart.push({ name: item.name, price: item.price, quantity: item.quantity || 1, image: item.image || "" }); }
+    else {
+      const entry = { name: item.name, price: item.price, quantity: item.quantity || 1, image: item.image || "" };
+      if(item.catalog_object_id) entry.catalog_object_id = item.catalog_object_id;
+      if(item.modifiers) entry.modifiers = item.modifiers;
+      if(item.modifier_name) entry.modifier_name = item.modifier_name;
+      cart.push(entry);
+    }
     saveCart(cart);
-    showToast(item.name + " added to cart");
+    showToast((item.modifier_name ? item.name + " — " + item.modifier_name : item.name) + " added to cart");
   }
   window.ssAddToCart = addToCart;
 
@@ -91,7 +102,7 @@
       html += `<div class="cart-item">
         ${item.image ? `<img class="cart-item-img" src="${item.image}" alt="${item.name}">` : `<div class="cart-item-img"></div>`}
         <div>
-          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-name">${item.modifier_name ? item.name + ' — ' + item.modifier_name : item.name}</div>
           <div class="cart-item-price">${fmt(item.price)}</div>
           <div class="cart-item-controls">
             <button class="cart-qty-btn" data-action="minus" data-idx="${idx}" aria-label="Decrease quantity">&minus;</button>
@@ -132,7 +143,12 @@
     const btn = document.getElementById("cart-checkout-btn");
     if(btn){ btn.disabled = true; btn.textContent = "Processing..."; }
 
-    const items = cart.map(i => ({ name: i.name, price: i.price, quantity: i.quantity }));
+    const items = cart.map(i => {
+      const o = { name: i.name, price: i.price, quantity: i.quantity };
+      if(i.catalog_object_id) o.catalog_object_id = i.catalog_object_id;
+      if(i.modifiers) o.modifiers = i.modifiers;
+      return o;
+    });
 
     try {
       const res = await fetch("/api/checkout", {

@@ -325,7 +325,7 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
   document.getElementById('qty-plus').addEventListener('click', function(){ qty++; qd.textContent = qty; });
   document.getElementById('add-to-cart').addEventListener('click', function(e){
     e.preventDefault();
-    ssAddToCart({ name: 'Signature Candle', price: 6500, quantity: qty, image: 'assets/img/candle-lit-travertine.jpg' });
+    ssAddToCart({ name: 'Signature Candle', price: 6500, quantity: qty, image: 'assets/img/candle-lit-travertine.jpg', catalog_object_id: 'VLREUBVDQK5Z5FWGIZVGN44L' });
   });
 })();
 </script>

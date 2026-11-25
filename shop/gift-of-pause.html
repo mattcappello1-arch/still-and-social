@@ -311,9 +311,12 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
   const qd = document.getElementById('qty-display');
   document.getElementById('qty-minus').addEventListener('click', function(){ if(qty > 1){ qty--; qd.textContent = qty; } });
   document.getElementById('qty-plus').addEventListener('click', function(){ qty++; qd.textContent = qty; });
+  const teaModifierMap = { lemongrass: 'PUW45C34EJLI2ODFRTB45BPF', jasmine: 'QCPKBGHPPK3E2RL7FRGVVEBN', peppermint: 'MIEOYZGLUAXOAQGUVCARIMHS' };
+  const teaNameMap = { lemongrass: 'Lemongrass & Ginger', jasmine: 'Jasmine Green', peppermint: 'Peppermint' };
   document.getElementById('add-to-cart').addEventListener('click', function(e){
     e.preventDefault();
-    ssAddToCart({ name: 'Gift of Pause', price: 7900, quantity: qty, image: 'assets/img/ritual-box.jpg' });
+    const selectedTea = document.querySelector('input[name="tea"]:checked').value;
+    ssAddToCart({ name: 'Gift of Pause', price: 7900, quantity: qty, image: 'assets/img/ritual-box.jpg', catalog_object_id: 'H7WO5CTS6VS74U4HUM5P7WSV', modifiers: [{ catalog_object_id: teaModifierMap[selectedTea] }], modifier_name: teaNameMap[selectedTea] });
   });
 })();
 </script>

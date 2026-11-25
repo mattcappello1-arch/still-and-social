@@ -301,9 +301,12 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
   const qd = document.getElementById('qty-display');
   document.getElementById('qty-minus').addEventListener('click', function(){ if(qty > 1){ qty--; qd.textContent = qty; } });
   document.getElementById('qty-plus').addEventListener('click', function(){ qty++; qd.textContent = qty; });
+  const blendModifierMap = { '0': 'PUW45C34EJLI2ODFRTB45BPF', '1': 'QCPKBGHPPK3E2RL7FRGVVEBN', '2': 'MIEOYZGLUAXOAQGUVCARIMHS' };
+  const blendNameMap = { '0': 'Lemongrass & Ginger', '1': 'Jasmine Green', '2': 'Peppermint' };
   document.getElementById('add-to-cart').addEventListener('click', function(e){
     e.preventDefault();
-    ssAddToCart({ name: 'Love Tea, Single', price: 1700, quantity: qty, image: 'assets/img/tea-lemongrass-ginger.jpg' });
+    const selectedBlend = document.querySelector('input[name="blend"]:checked').value;
+    ssAddToCart({ name: 'Love Tea, Single', price: 1700, quantity: qty, image: 'assets/img/tea-lemongrass-ginger.jpg', catalog_object_id: '3XYZ2EEW5YX7Z3FINV2STUSC', modifiers: [{ catalog_object_id: blendModifierMap[selectedBlend] }], modifier_name: blendNameMap[selectedBlend] });
   });
 })();
 </script>

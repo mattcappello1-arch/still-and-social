@@ -25,14 +25,26 @@ module.exports = async function handler(req, res) {
       return res.status(500).json({ error: 'Square not configured' });
     }
 
-    const lineItems = items.map(item => ({
-      name: String(item.name),
-      quantity: String(item.quantity || 1),
-      base_price_money: {
-        amount: parseInt(item.price, 10),
-        currency: 'AUD'
+    const lineItems = items.map(item => {
+      if (item.catalog_object_id) {
+        const li = {
+          catalog_object_id: String(item.catalog_object_id),
+          quantity: String(item.quantity || 1)
+        };
+        if (item.modifiers && item.modifiers.length > 0) {
+          li.modifiers = item.modifiers.map(m => ({ catalog_object_id: String(m.catalog_object_id) }));
+        }
+        return li;
       }
-    }));
+      return {
+        name: String(item.name),
+        quantity: String(item.quantity || 1),
+        base_price_money: {
+          amount: parseInt(item.price, 10),
+          currency: 'AUD'
+        }
+      };
+    });
 
     const idempotencyKey = crypto.randomUUID();
 

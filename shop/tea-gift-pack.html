@@ -275,7 +275,7 @@ document.querySelectorAll(".reveal").forEach(el => io.observe(el));
   document.getElementById('qty-plus').addEventListener('click', function(){ qty++; qd.textContent = qty; });
   document.getElementById('add-to-cart').addEventListener('click', function(e){
     e.preventDefault();
-    ssAddToCart({ name: '3 Tea Gift Pack', price: 4900, quantity: qty, image: 'assets/img/love-tea-trio.jpg' });
+    ssAddToCart({ name: '3 Tea Gift Pack', price: 4900, quantity: qty, image: 'assets/img/love-tea-trio.jpg', catalog_object_id: 'MW6CGMI3LJPD2WQ655GFXRDI' });
   });
 })();
 </script>
