@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Collection — Rituals of Good Living | Still &amp; Social</title>
 <meta name="description" content="A considered collection of objects made to bring the calm of the sanctuary into everyday life. Candles, tea and ritual gifts from Still & Social.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stillandsocial.com.au/shop/">
+<meta property="og:title" content="The Collection — Rituals of Good Living | Still & Social">
+<meta property="og:description" content="A considered collection of objects made to bring the calm of the sanctuary into everyday life. Candles, tea and ritual gifts.">
+<meta property="og:image" content="https://stillandsocial.com.au/shop/assets/img/candle-lit-travertine.jpg">
+<meta property="og:locale" content="en_AU">
+<meta property="og:site_name" content="Still & Social">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Collection — Rituals of Good Living | Still & Social">
+<meta name="twitter:description" content="A considered collection of objects made to bring the calm of the sanctuary into everyday life.">
+<meta name="twitter:image" content="https://stillandsocial.com.au/shop/assets/img/candle-lit-travertine.jpg">
+<link rel="canonical" href="https://stillandsocial.com.au/shop/">
+<meta name="theme-color" content="#FAF7EC">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Google+Sans+Code:wght@300;400&display=swap" rel="stylesheet">
@@ -84,7 +100,7 @@
       <a href="/#world">The World</a>
       <a href="/#dining">Dining</a>
       <a href="/#rituals">Rituals</a>
-
+      <a href="/shop/">Shop</a>
       <a href="/wellness.html">Wellness</a>
       <a href="/#values">Values</a>
       <a href="/foundation.html">Giving Back</a>
@@ -145,6 +161,17 @@
   </div>
 </main>
 
+<section class="signup reveal" style="text-align:center;padding:clamp(72px,10vw,140px) var(--gutter);max-width:600px;margin:0 auto">
+  <p class="eyebrow">Stay in the loop</p>
+  <h2 style="font-family:var(--serif);font-weight:300;font-size:clamp(28px,3vw,42px);line-height:1.15;margin:18px 0 14px">Be the first to know.</h2>
+  <p style="font-size:13px;color:var(--coffee);max-width:38ch;margin:0 auto 32px">New releases, restocks, and quiet updates — delivered to your inbox, never too often.</p>
+  <form id="signup-form" style="display:flex;gap:10px;max-width:440px;margin:0 auto">
+    <input type="email" id="signup-email" placeholder="Your email" required style="flex:1;padding:16px 18px;border:1px solid rgba(36,31,33,.18);background:none;font-family:var(--mono);font-size:13px;color:var(--char);outline:none">
+    <button type="submit" style="padding:16px 28px;background:var(--char);color:var(--cream);border:none;font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:background .25s;white-space:nowrap">Join</button>
+  </form>
+  <p id="signup-msg" style="font-size:12px;margin-top:14px;color:var(--coffee);min-height:20px"></p>
+</section>
+
 <footer>
   <span>Still &amp; Social · Rituals of Good Living</span>
   <a href="https://stillandsocial.com.au" style="text-decoration:none">stillandsocial.com.au</a>
@@ -161,6 +188,35 @@ window.addEventListener('scroll', onNavScroll, {passive:true});
 onNavScroll();
 document.getElementById('menuToggle').addEventListener('click', () => navEl.classList.toggle('open'));
 document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navEl.classList.remove('open')));
+
+/* ---------- EMAIL SIGNUP ---------- */
+document.getElementById('signup-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const email = document.getElementById('signup-email').value.trim();
+  const msg = document.getElementById('signup-msg');
+  if(!email) return;
+  msg.textContent = 'Joining...';
+  msg.style.color = 'var(--coffee)';
+  try {
+    const res = await fetch('https://academy.stillandsocial.com.au/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    if(data.success){
+      msg.textContent = 'Welcome. You\'re on the list.';
+      msg.style.color = 'var(--char)';
+      document.getElementById('signup-email').value = '';
+    } else {
+      msg.textContent = 'Something went wrong. Try again.';
+      msg.style.color = 'var(--sienna)';
+    }
+  } catch(err){
+    msg.textContent = 'Something went wrong. Try again.';
+    msg.style.color = 'var(--sienna)';
+  }
+});
 
 /* ---------- REVEAL ---------- */
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .15 });
