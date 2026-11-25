@@ -186,9 +186,14 @@
 
       <p class="madeto"><b>Made in Melbourne.</b> Ships within 5 business days.</p>
 
-      <a class="cta" id="buy-now" href="https://square.link/u/mml7bKBT" target="_blank">Order now</a>
+      <div class="ss-qty-picker">
+        <button type="button" id="qty-minus" aria-label="Decrease quantity">&minus;</button>
+        <span id="qty-display">1</span>
+        <button type="button" id="qty-plus" aria-label="Increase quantity">+</button>
+      </div>
+      <button class="cta" id="add-to-cart">Add to cart</button>
       <div class="assure">
-        <span>Secure checkout with Square</span><span>·</span>
+        <span>Secure checkout</span><span>·</span>
         <span>Organic &amp; biodegradable</span>      </div>
 
       <details open>
@@ -230,6 +235,7 @@
   <a href="mailto:info@stillandsocial.com" style="text-decoration:none">info@stillandsocial.com</a>
 </footer>
 
+<script src="assets/cart.js"></script>
 <script>
 /* ---------- GALLERY ---------- */
 const IMAGES = [
@@ -260,6 +266,18 @@ document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click
 /* ---------- REVEAL ---------- */
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .15 });
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+/* ---------- ADD TO CART ---------- */
+(function(){
+  let qty = 1;
+  const qd = document.getElementById('qty-display');
+  document.getElementById('qty-minus').addEventListener('click', function(){ if(qty > 1){ qty--; qd.textContent = qty; } });
+  document.getElementById('qty-plus').addEventListener('click', function(){ qty++; qd.textContent = qty; });
+  document.getElementById('add-to-cart').addEventListener('click', function(e){
+    e.preventDefault();
+    ssAddToCart({ name: '3 Tea Gift Pack', price: 4900, quantity: qty, image: 'assets/img/love-tea-trio.jpg' });
+  });
+})();
 </script>
 </body>
 </html>

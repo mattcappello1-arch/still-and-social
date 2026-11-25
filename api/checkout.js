@@ -1,9 +1,4 @@
-const Stripe = require('stripe');
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
 module.exports = async function handler(req, res) {
-  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -17,40 +12,63 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    let lineItems = [];
+    const { items } = req.body;
 
-    // Support new multi-item format: { items: [{priceId, quantity}, ...] }
-    if (req.body.items && Array.isArray(req.body.items)) {
-      lineItems = req.body.items.map(item => ({
-        price: item.priceId,
-        quantity: item.quantity || 1,
-      }));
-    }
-    // Backward compat: single item format { priceId, quantity }
-    else if (req.body.priceId) {
-      lineItems = [{
-        price: req.body.priceId,
-        quantity: req.body.quantity || 1,
-      }];
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return res.status(400).json({ error: 'No items provided' });
     }
 
-    if (lineItems.length === 0) {
-      return res.status(400).json({ error: 'At least one item is required' });
+    const SQUARE_ACCESS_TOKEN = process.env.SQUARE_ACCESS_TOKEN;
+    const LOCATION_ID = 'LYWEP6QX2PFZN';
+
+    if (!SQUARE_ACCESS_TOKEN) {
+      return res.status(500).json({ error: 'Square not configured' });
     }
 
-    const session = await stripe.checkout.sessions.create({
-      mode: 'payment',
-      ui_mode: 'embedded',
-      line_items: lineItems,
-      shipping_address_collection: {
-        allowed_countries: ['AU'],
+    const lineItems = items.map(item => ({
+      name: String(item.name),
+      quantity: String(item.quantity || 1),
+      base_price_money: {
+        amount: parseInt(item.price, 10),
+        currency: 'AUD'
+      }
+    }));
+
+    const idempotencyKey = crypto.randomUUID();
+
+    const response = await fetch('https://connect.squareup.com/v2/online-checkout/payment-links', {
+      method: 'POST',
+      headers: {
+        'Square-Version': '2024-01-18',
+        'Authorization': `Bearer ${SQUARE_ACCESS_TOKEN}`,
+        'Content-Type': 'application/json'
       },
-      return_url: 'https://stillandsocial.com.au/shop/success.html?session_id={CHECKOUT_SESSION_ID}',
+      body: JSON.stringify({
+        idempotency_key: idempotencyKey,
+        order: {
+          location_id: LOCATION_ID,
+          line_items: lineItems
+        },
+        checkout_options: {
+          redirect_url: 'https://stillandsocial.com.au/shop/success.html',
+          ask_for_shipping_address: true
+        }
+      })
     });
 
-    res.status(200).json({ clientSecret: session.client_secret });
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error('Square API error:', JSON.stringify(data));
+      return res.status(response.status).json({
+        error: 'Checkout failed',
+        details: data.errors ? data.errors.map(e => e.detail).join('; ') : 'Unknown error'
+      });
+    }
+
+    return res.status(200).json({ url: data.payment_link.url });
   } catch (err) {
-    console.error('Checkout session error:', err.message);
-    res.status(500).json({ error: err.message });
+    console.error('Checkout error:', err);
+    return res.status(500).json({ error: 'Internal server error' });
   }
 };
