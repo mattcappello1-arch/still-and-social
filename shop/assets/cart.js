@@ -135,39 +135,11 @@
     document.getElementById("cart-checkout-btn").addEventListener("click", startCheckout);
   }
 
-  /* ---- Square Checkout ---- */
-  async function startCheckout(){
+  /* ---- Checkout ---- */
+  function startCheckout(){
     const cart = getCart();
     if(cart.length === 0) return;
-
-    const btn = document.getElementById("cart-checkout-btn");
-    if(btn){ btn.disabled = true; btn.textContent = "Processing..."; }
-
-    const items = cart.map(i => {
-      const o = { name: i.name, price: i.price, quantity: i.quantity };
-      if(i.catalog_object_id) o.catalog_object_id = i.catalog_object_id;
-      if(i.modifiers) o.modifiers = i.modifiers;
-      return o;
-    });
-
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items })
-      });
-      const data = await res.json();
-      if(data.url){
-        window.location.href = data.url;
-      } else {
-        showToast(data.error || "Checkout failed");
-        if(btn){ btn.disabled = false; btn.textContent = "Checkout"; }
-      }
-    } catch(err) {
-      console.error("Checkout error:", err);
-      showToast("Something went wrong");
-      if(btn){ btn.disabled = false; btn.textContent = "Checkout"; }
-    }
+    window.location.href = "/shop/checkout.html";
   }
 
   /* ---- Inject UI ---- */
