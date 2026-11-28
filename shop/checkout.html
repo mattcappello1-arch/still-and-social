@@ -44,21 +44,23 @@
   /* Nav */
   body{padding-top:120px}
   .container{max-width:1320px;margin:0 auto;padding:0 var(--gutter);position:relative;z-index:2}
-  .nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:22px 0;transition:background .4s ease,padding .4s ease,border-color .4s ease;border-bottom:1px solid transparent}
-  .nav.scrolled{background:rgba(245,241,221,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:14px 0;border-bottom-color:rgba(43,38,32,.12)}
+  .nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:22px 0;transition:background .8s ease,padding .8s ease,border-color .8s ease;border-bottom:1px solid transparent;opacity:0;animation:navFadeIn 1.5s ease .3s forwards}
+  @keyframes navFadeIn{to{opacity:1}}
+  .nav.scrolled{background:rgba(245,241,221,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:14px 0;border-bottom-color:rgba(43,38,32,.06)}
   .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
   .brand-mark{display:inline-flex;align-items:center;color:var(--char);transition:color .4s ease}
   .brand-mark:hover{color:var(--sienna)}
-  .brand-icon{width:84px;height:84px;display:block;transition:transform .5s cubic-bezier(.2,.6,.2,1),width .4s ease,height .4s ease}
+  .brand-icon{width:84px;height:84px;display:block;transition:transform .6s cubic-bezier(.2,.6,.2,1),width .8s ease,height .8s ease}
   .nav.scrolled .brand-icon{width:50px;height:50px}
-  .brand-mark:hover .brand-icon{transform:translateY(-2px)}
-  .nav-links{display:flex;align-items:center;gap:32px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--coffee)}
-  .nav-links a{transition:color .3s ease;position:relative;padding:4px 0;text-decoration:none}
-  .nav-links a:hover{color:var(--sienna)}
-  .nav-links a::after{content:'';position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--sienna);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+  .brand-mark:hover .brand-icon{transform:rotate(8deg)}
+  .nav-links{display:flex;align-items:center;gap:32px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--coffee)}
+  .nav-links a{transition:color .4s ease,letter-spacing .5s ease;position:relative;padding:4px 0;text-decoration:none}
+  .nav-links a:hover{color:var(--sienna);letter-spacing:.24em}
+  .nav-links a::after{content:'';position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--sienna);transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.25,.1,.25,1)}
   .nav-links a:hover::after{transform:scaleX(1)}
   .menu-toggle{display:none;background:none;border:0;color:var(--char);padding:8px}
-  @media(max-width:980px){.nav-links{display:none}.menu-toggle{display:block}.nav.open .nav-links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:22px;padding:36px var(--gutter) 40px;background:var(--cream);border-top:1px solid rgba(43,38,32,.12)}}
+  @media(max-width:980px){.nav-links{display:none}.menu-toggle{display:block}.nav.open .nav-links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:22px;padding:36px var(--gutter) 40px;background:var(--cream);border-top:1px solid rgba(43,38,32,.12)}.nav.open .nav-links a{opacity:0;animation:linkReveal .5s ease forwards}.nav.open .nav-links a:nth-child(1){animation-delay:.05s}.nav.open .nav-links a:nth-child(2){animation-delay:.1s}.nav.open .nav-links a:nth-child(3){animation-delay:.15s}.nav.open .nav-links a:nth-child(4){animation-delay:.2s}.nav.open .nav-links a:nth-child(5){animation-delay:.25s}}
+  @keyframes linkReveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
   /* Checkout layout */
   .checkout-wrap{max-width:680px;margin:0 auto;padding:clamp(48px,6vw,88px) var(--gutter) clamp(80px,10vw,160px)}
@@ -67,12 +69,20 @@
 
   /* Order summary */
   .order-items{border-top:1px solid rgba(36,31,33,.12);margin-bottom:0}
-  .order-row{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(36,31,33,.08);font-size:13px;letter-spacing:.03em;gap:16px}
+  .order-row{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid rgba(36,31,33,.08);font-size:13px;letter-spacing:.03em;gap:12px}
   .order-row .item-name{flex:1;min-width:0}
-  .order-row .item-qty{color:var(--coffee);font-size:12px;white-space:nowrap;flex-shrink:0}
+  .order-row .item-controls{display:flex;align-items:center;gap:0;flex-shrink:0}
+  .order-row .item-controls button{width:32px;height:32px;border:1px solid rgba(36,31,33,.18);background:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--char);font-family:var(--mono);transition:background .2s}
+  .order-row .item-controls button:hover{background:var(--cream)}
+  .order-row .item-controls span{width:36px;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;border-top:1px solid rgba(36,31,33,.18);border-bottom:1px solid rgba(36,31,33,.18)}
   .order-row .item-price{font-size:13px;letter-spacing:.06em;flex-shrink:0;text-align:right;min-width:72px}
-  .order-total-row{display:flex;justify-content:space-between;padding:18px 0 0;font-size:14px;letter-spacing:.06em}
+  .order-row .item-remove{background:none;border:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--coffee);cursor:pointer;padding:4px 0;transition:color .2s;margin-left:8px;flex-shrink:0}
+  .order-row .item-remove:hover{color:var(--sienna)}
+  .edit-cart-link{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--coffee);text-decoration:none;margin-top:12px;transition:color .2s}
+  .edit-cart-link:hover{color:var(--sienna)}
+  .order-total-row{display:flex;justify-content:space-between;padding:14px 0 0;font-size:13px;letter-spacing:.06em}
   .order-total-row strong{font-weight:400}
+  .order-total-row.grand{padding-top:14px;margin-top:4px;border-top:1px solid rgba(36,31,33,.12);font-size:14px}
   .order-shipping-note{font-size:11px;color:var(--coffee);letter-spacing:.04em;margin-top:4px}
 
   /* Form */
@@ -141,13 +151,10 @@
     </a>
     <div class="nav-links">
       <a href="/#manifesto">Our Story</a>
-      <a href="/#world">The World</a>
       <a href="/#dining">Dining</a>
       <a href="/#rituals">Rituals</a>
       <a href="/shop/">Shop</a>
       <a href="/wellness.html">Wellness</a>
-      <a href="/#values">Values</a>
-      <a href="/foundation.html">Giving Back</a>
     </div>
     <button class="menu-toggle" id="menuToggle" aria-label="Menu">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
@@ -201,17 +208,49 @@ document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click
   let subtotal = 0;
   cart.forEach(i => { subtotal += i.price * i.quantity; });
 
-  /* Build order summary rows */
-  let itemsHtml = '';
-  cart.forEach(i => {
-    const displayName = i.modifier_name ? i.name + ' &mdash; ' + i.modifier_name : i.name;
-    const lineTotal = i.price * i.quantity;
-    itemsHtml += `<div class="order-row">
-      <span class="item-name">${displayName}</span>
-      <span class="item-qty">&times; ${i.quantity}</span>
-      <span class="item-price">${fmt(lineTotal)}</span>
-    </div>`;
-  });
+  /* Build order summary */
+  function buildSummary(){
+    const freshCart = window.ssGetCart ? ssGetCart() : [];
+    if(!freshCart || freshCart.length === 0){
+      window.location.href = '/shop/';
+      return;
+    }
+    let st = 0;
+    let html = '';
+    freshCart.forEach((i, idx) => {
+      const displayName = i.modifier_name ? i.name + ' &mdash; ' + i.modifier_name : i.name;
+      const lineTotal = i.price * i.quantity;
+      st += lineTotal;
+      html += `<div class="order-row">
+        <span class="item-name">${displayName}</span>
+        <div class="item-controls">
+          <button data-co-action="minus" data-co-idx="${idx}" aria-label="Decrease">&minus;</button>
+          <span>${i.quantity}</span>
+          <button data-co-action="plus" data-co-idx="${idx}" aria-label="Increase">+</button>
+        </div>
+        <span class="item-price">${fmt(lineTotal)}</span>
+        <button class="item-remove" data-co-action="remove" data-co-idx="${idx}">Remove</button>
+      </div>`;
+    });
+    document.getElementById('co-items').innerHTML = html;
+    document.getElementById('co-subtotal').textContent = fmt(st);
+    subtotal = st;
+    if(typeof updateShipping === 'function') updateShipping();
+
+    /* Wire controls */
+    document.querySelectorAll('[data-co-action]').forEach(btn => {
+      btn.addEventListener('click', function(){
+        const idx = parseInt(this.dataset.coIdx);
+        const c = window.ssGetCart();
+        if(this.dataset.coAction === 'plus'){ c[idx].quantity++; }
+        else if(this.dataset.coAction === 'minus'){ if(c[idx].quantity > 1) c[idx].quantity--; else c.splice(idx, 1); }
+        else if(this.dataset.coAction === 'remove'){ c.splice(idx, 1); }
+        localStorage.setItem('ss_cart', JSON.stringify(c));
+        if(window.ssGetCart().length === 0){ window.location.href = '/shop/'; return; }
+        buildSummary();
+      });
+    });
+  }
 
   /* Render full checkout form */
   wrap.innerHTML = `
@@ -219,9 +258,11 @@ document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click
     <h1>Your Order</h1>
 
     <div class="section-title"><p class="eyebrow">Order Summary</p></div>
-    <div class="order-items">${itemsHtml}</div>
-    <div class="order-total-row"><span>Subtotal</span><strong>${fmt(subtotal)}</strong></div>
-    <p class="order-shipping-note">Shipping calculated at payment</p>
+    <div class="order-items" id="co-items"></div>
+    <div class="order-total-row"><span>Subtotal</span><strong id="co-subtotal">${fmt(subtotal)}</strong></div>
+    <div class="order-total-row"><span>Shipping</span><strong id="co-shipping">Select state</strong></div>
+    <div class="order-total-row grand"><span>Total</span><strong id="co-total">${fmt(subtotal)}</strong></div>
+    <a class="edit-cart-link" href="/shop/">Continue shopping</a>
 
     <div class="section-title"><p class="eyebrow">Your Details</p></div>
     <div class="field">
@@ -283,6 +324,42 @@ document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click
     <p class="secure-note">Secure payment powered by Square</p>
   `;
 
+  /* Shipping rates (cents) */
+  const SHIPPING_RATES = {
+    VIC: 995,    /* $9.95 Melbourne Metro / VIC */
+    NSW: 1495, QLD: 1495, SA: 1495, WA: 1495, TAS: 1495, NT: 1495, ACT: 1495
+  };
+  let shippingCost = 0;
+
+  function updateShipping(){
+    const stateEl = document.getElementById('ship-state');
+    if(!stateEl) return;
+    const state = stateEl.value;
+    const shipEl = document.getElementById('co-shipping');
+    const totalEl = document.getElementById('co-total');
+    const payBtn = document.getElementById('pay-btn');
+
+    if(state && SHIPPING_RATES[state] !== undefined){
+      shippingCost = SHIPPING_RATES[state];
+      if(shipEl) shipEl.textContent = fmt(shippingCost);
+    } else {
+      shippingCost = 0;
+      if(shipEl) shipEl.textContent = 'Select state';
+    }
+    const total = subtotal + shippingCost;
+    if(totalEl) totalEl.textContent = fmt(total);
+    if(payBtn && !payBtn.disabled) payBtn.textContent = 'Pay ' + fmt(total);
+  }
+
+  /* Build initial summary */
+  buildSummary();
+
+  /* Shipping recalc on state change */
+  document.getElementById('ship-state').addEventListener('change', updateShipping);
+
+  /* Also recalc shipping when quantities change */
+  const origBuildSummary = buildSummary;
+
   /* ---------- INIT SQUARE ---------- */
   const APP_ID = 'sq0idp-ul2jh32N7Ksa_TxcwFwJCw';
   const LOCATION_ID = 'LYWEP6QX2PFZN';
@@ -290,10 +367,17 @@ document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click
   let payments, card, giftCard;
   let gcVisible = false;
 
+  if(typeof Square === 'undefined'){
+    showMsg('Payment system is loading. Please refresh the page.', true);
+    console.error('Square SDK not loaded');
+    return;
+  }
+
   try {
     payments = Square.payments(APP_ID, LOCATION_ID);
   } catch(e) {
     showMsg('Could not load payment form. Please refresh the page.', true);
+    console.error('Square.payments error:', e);
     return;
   }
 
@@ -303,13 +387,14 @@ document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click
       style: {
         '.input-container': { borderColor: 'rgba(36,31,33,.18)', borderRadius: '0px' },
         '.input-container.is-focus': { borderColor: '#241F21' },
-        'input': { fontFamily: '"Google Sans Code", ui-monospace, Menlo, monospace', fontSize: '14px', color: '#241F21' },
+        'input': { fontFamily: 'monospace', fontSize: '14px', color: '#241F21' },
         'input::placeholder': { color: '#59493A' }
       }
     });
     await card.attach('#card-container');
   } catch(e) {
-    showMsg('Could not initialise card form. Please try again.', true);
+    showMsg('Could not initialise card form: ' + e.message, true);
+    console.error('Card init error:', e);
     return;
   }
 
@@ -372,7 +457,7 @@ document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click
           token: walletResult.token,
           items: items,
           shipping: { name, email, address, city, state, postcode },
-          total: subtotal
+          total: subtotal + shippingCost
         })
       });
       const data = await res.json();
@@ -419,7 +504,8 @@ document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click
       giftCard = await payments.giftCard();
       await giftCard.attach('#gift-card-container');
     } catch(e) {
-      showMsg('Could not load gift card form.', true);
+      console.error('Gift card init error:', e);
+      showMsg('Could not load gift card form: ' + e.message, true);
     }
   });
 
@@ -496,7 +582,7 @@ document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click
       giftCardToken: gcToken,
       items: items,
       shipping: { name, email, address, city, state, postcode },
-      total: subtotal
+      total: subtotal + shippingCost
     };
 
     /* Send to API */

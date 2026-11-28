@@ -139,15 +139,18 @@
     top: 0; left: 0; right: 0;
     z-index: 50;
     padding: 22px 0;
-    transition: background 0.4s ease, padding 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+    transition: background 0.8s ease, padding 0.8s ease, border-color 0.8s ease, color 0.4s ease;
     border-bottom: 1px solid transparent;
+    opacity: 0;
+    animation: navFadeIn 1.5s ease 0.3s forwards;
   }
+  @keyframes navFadeIn { to { opacity: 1; } }
   .nav.scrolled {
     background: rgba(245, 241, 221, 0.9);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     padding: 14px 0;
-    border-bottom-color: var(--rule);
+    border-bottom-color: rgba(43, 38, 32, 0.06);
   }
   .nav-inner {
     display: flex;
@@ -165,23 +168,23 @@
   .brand-icon {
     width: 84px; height: 84px;
     display: block;
-    transition: transform 0.5s cubic-bezier(0.2, 0.6, 0.2, 1), width 0.4s ease, height 0.4s ease;
+    transition: transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1), width 0.8s ease, height 0.8s ease;
   }
   .nav.scrolled .brand-icon {
     width: 50px; height: 50px;
   }
-  .brand-mark:hover .brand-icon { transform: translateY(-2px); }
+  .brand-mark:hover .brand-icon { transform: rotate(8deg); }
   .nav-links {
     display: flex;
     align-items: center;
     gap: 32px;
     font-size: 11px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--ink-soft);
   }
-  .nav-links a { transition: color 0.3s ease; position: relative; padding: 4px 0; }
-  .nav-links a:hover { color: var(--sienna); }
+  .nav-links a { transition: color 0.4s ease, letter-spacing 0.5s ease; position: relative; padding: 4px 0; }
+  .nav-links a:hover { color: var(--sienna); letter-spacing: 0.24em; }
   .nav-links a::after {
     content: '';
     position: absolute;
@@ -190,7 +193,7 @@
     background: var(--sienna);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.4s ease;
+    transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
   .nav-links a:hover::after { transform: scaleX(1); }
   .nav-cta {
@@ -221,6 +224,16 @@
       border-top: 1px solid var(--rule);
       font-size: 13px;
     }
+    .nav.open .nav-links a { opacity: 0; animation: linkReveal 0.5s ease forwards; }
+    .nav.open .nav-links a:nth-child(1) { animation-delay: 0.05s; }
+    .nav.open .nav-links a:nth-child(2) { animation-delay: 0.1s; }
+    .nav.open .nav-links a:nth-child(3) { animation-delay: 0.15s; }
+    .nav.open .nav-links a:nth-child(4) { animation-delay: 0.2s; }
+    .nav.open .nav-links a:nth-child(5) { animation-delay: 0.25s; }
+  }
+  @keyframes linkReveal {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
   }
 
   /* ========================================================
@@ -1289,13 +1302,10 @@
     </a>
     <div class="nav-links">
       <a href="#manifesto">Our Story</a>
-      <a href="#world">The World</a>
       <a href="#dining">Dining</a>
       <a href="#rituals">Rituals</a>
       <a href="/shop/">Shop</a>
       <a href="/wellness.html">Wellness</a>
-      <a href="#values">Values</a>
-      <a href="/foundation.html">Giving Back</a>
     </div>
     <button class="menu-toggle" id="menuToggle" aria-label="Menu">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
@@ -1644,11 +1654,11 @@
       <div class="footer-col">
         <h5>The World</h5>
         <ul>
+          <li><a href="#manifesto">Our Story</a></li>
           <li><a href="#dining">Dining Sanctuary</a></li>
           <li><a href="#rituals">Rituals</a></li>
           <li><a href="/shop/">Shop</a></li>
-          <li><a href="#wellness">Wellness <span class="tag">Soon</span></a></li>
-          <li><a href="#manifesto">Our Story</a></li>
+          <li><a href="/wellness.html">Wellness</a></li>
         </ul>
       </div>
 
