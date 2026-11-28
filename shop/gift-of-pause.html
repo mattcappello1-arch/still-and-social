@@ -60,7 +60,7 @@
   .brand-mark:hover{color:var(--sienna)}
   .brand-icon{width:84px;height:84px;display:block;transition:transform .6s cubic-bezier(.2,.6,.2,1),width .8s ease,height .8s ease}
   .nav.scrolled .brand-icon{width:50px;height:50px}
-  .brand-mark:hover .brand-icon{transform:rotate(8deg)}
+  .brand-mark:hover .brand-icon{transform:translateY(-2px)}
   .nav-links{display:flex;align-items:center;gap:32px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--coffee)}
   .nav-links a{transition:color .4s ease,letter-spacing .5s ease;position:relative;padding:4px 0;text-decoration:none}
   .nav-links a:hover{color:var(--sienna);letter-spacing:.24em}
@@ -170,8 +170,16 @@
 <main>
   <!-- ============ PRODUCT ============ -->
   <section class="product" id="buy">
-    <div class="gallery" style="display:block">
-      <div class="stage" id="stage" style="aspect-ratio:4/5;background:var(--cream);overflow:hidden">
+    <div class="gallery">
+      <div class="thumbs" role="tablist" aria-label="Product images">
+        <button aria-label="Gift of Pause on the beach" aria-current="true">
+          <img src="assets/img/gift-of-pause-beach.jpg" alt="Gift of Pause on the beach" loading="lazy" style="width:100%;height:100%;object-fit:cover">
+        </button>
+        <button aria-label="Gift of Pause from above">
+          <img src="assets/img/gift-of-pause-overhead.jpg" alt="Gift of Pause — box and candle from above" loading="lazy" style="width:100%;height:100%;object-fit:cover">
+        </button>
+      </div>
+      <div class="stage" id="stage">
         <img src="assets/img/gift-of-pause-beach.jpg" alt="Gift of Pause — candle, tea and box on the beach by Still & Social" style="width:100%;height:100%;object-fit:cover">
       </div>
     </div>
@@ -275,6 +283,20 @@
 
 <script src="assets/cart.js"></script>
 <script>
+/* ---------- GALLERY ---------- */
+const IMAGES = [
+  { src: "assets/img/gift-of-pause-beach.jpg", alt: "Gift of Pause on the beach" },
+  { src: "assets/img/gift-of-pause-overhead.jpg", alt: "Gift of Pause — box and candle from above" }
+];
+const stage = document.getElementById("stage");
+const thumbs = document.querySelectorAll(".thumbs button");
+thumbs.forEach((btn, i) => {
+  btn.onclick = () => {
+    stage.innerHTML = `<img src="${IMAGES[i].src}" alt="${IMAGES[i].alt}" style="width:100%;height:100%;object-fit:cover">`;
+    thumbs.forEach(b => b.setAttribute("aria-current", b === btn));
+  };
+});
+
 /* ---------- TEA PICKER ---------- */
 const teaCards = {
   lemongrass: document.getElementById("teacard-lemongrass"),
