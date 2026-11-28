@@ -55,7 +55,7 @@
      RESET
      ======================================================== */
   *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
     background: var(--bg);
@@ -210,29 +210,72 @@
   .nav-cta:hover { background: var(--ink); color: var(--cream); }
   .menu-toggle { display: none; background: none; border: 0; color: var(--ink); padding: 8px; }
 
+  /* Hamburger to X animation */
+  .menu-toggle svg line {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    transform-origin: center;
+  }
+  .nav.open .menu-toggle .line1 { transform: translateY(5px) rotate(45deg); }
+  .nav.open .menu-toggle .line2 { opacity: 0; }
+  .nav.open .menu-toggle .line3 { transform: translateY(-5px) rotate(-45deg); }
+
   @media (max-width: 980px) {
     .nav-links, .nav-cta { display: none; }
-    .menu-toggle { display: block; }
+    .menu-toggle { display: block; position: relative; z-index: 60; }
+
+    /* Full-screen overlay menu */
     .nav.open .nav-links {
       display: flex;
-      position: absolute;
-      top: 100%; left: 0; right: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
       flex-direction: column;
-      gap: 22px;
-      padding: 36px var(--gutter) 40px;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 0;
       background: var(--cream);
-      border-top: 1px solid var(--rule);
-      font-size: 13px;
+      z-index: 55;
+      font-size: 11px;
+      letter-spacing: 0.28em;
     }
-    .nav.open .nav-links a { opacity: 0; animation: linkReveal 0.5s ease forwards; }
-    .nav.open .nav-links a:nth-child(1) { animation-delay: 0.05s; }
-    .nav.open .nav-links a:nth-child(2) { animation-delay: 0.1s; }
-    .nav.open .nav-links a:nth-child(3) { animation-delay: 0.15s; }
-    .nav.open .nav-links a:nth-child(4) { animation-delay: 0.2s; }
-    .nav.open .nav-links a:nth-child(5) { animation-delay: 0.25s; }
+    .nav.open .nav-links a {
+      font-family: var(--serif);
+      font-size: clamp(28px, 5vw, 38px);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      text-transform: none;
+      color: var(--ink);
+      padding: 18px 0;
+      opacity: 0;
+      animation: linkReveal 0.8s ease forwards;
+    }
+    .nav.open .nav-links a:hover {
+      color: var(--sienna);
+      letter-spacing: 0.08em;
+    }
+    .nav.open .nav-links a::after { display: none; }
+    .nav.open .nav-links a:nth-child(1) { animation-delay: 0.15s; }
+    .nav.open .nav-links a:nth-child(2) { animation-delay: 0.25s; }
+    .nav.open .nav-links a:nth-child(3) { animation-delay: 0.35s; }
+    .nav.open .nav-links a:nth-child(4) { animation-delay: 0.45s; }
+    .nav.open .nav-links a:nth-child(5) { animation-delay: 0.55s; }
+
+    /* Tagline at bottom of mobile menu */
+    .nav.open .nav-links::after {
+      content: 'Rituals of Good Living';
+      position: absolute;
+      bottom: 48px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      opacity: 0;
+      animation: linkReveal 0.8s ease 0.7s forwards;
+    }
   }
   @keyframes linkReveal {
-    from { opacity: 0; transform: translateY(8px); }
+    from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: none; }
   }
 
@@ -1304,11 +1347,15 @@
       <a href="#manifesto">Our Story</a>
       <a href="#dining">Dining</a>
       <a href="#rituals">Rituals</a>
-      <a href="/shop/">Shop</a>
       <a href="/wellness.html">Wellness</a>
+      <a href="/shop/">Shop</a>
     </div>
     <button class="menu-toggle" id="menuToggle" aria-label="Menu">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <line class="line1" x1="3" y1="7" x2="21" y2="7"/>
+        <line class="line2" x1="3" y1="12" x2="21" y2="12"/>
+        <line class="line3" x1="3" y1="17" x2="21" y2="17"/>
+      </svg>
     </button>
   </div>
 </nav>
@@ -1657,8 +1704,8 @@
           <li><a href="#manifesto">Our Story</a></li>
           <li><a href="#dining">Dining Sanctuary</a></li>
           <li><a href="#rituals">Rituals</a></li>
-          <li><a href="/shop/">Shop</a></li>
           <li><a href="/wellness.html">Wellness</a></li>
+          <li><a href="/shop/">Shop</a></li>
         </ul>
       </div>
 
@@ -1698,6 +1745,32 @@
   document.querySelectorAll('.nav-links a').forEach(a =>
     a.addEventListener('click', () => nav.classList.remove('open'))
   );
+
+  // Slow, organic scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const id = this.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      const start = window.scrollY;
+      const end = target.getBoundingClientRect().top + start - 80;
+      const distance = end - start;
+      const duration = Math.min(2400, Math.max(1200, Math.abs(distance) * 0.8));
+      let startTime = null;
+      function ease(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      }
+      function step(time) {
+        if (!startTime) startTime = time;
+        const elapsed = time - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        window.scrollTo(0, start + distance * ease(progress));
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  });
 
   // Reveal on scroll
   const io = new IntersectionObserver((entries) => {
